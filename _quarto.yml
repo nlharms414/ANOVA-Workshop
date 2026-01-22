@@ -1,0 +1,15 @@
+project:
+  type: website
+  output-dir: docs
+
+website:
+  search: false
+  title: "ANOVA Workshops in R and SAS" 
+  navbar:
+    left:
+      - href: index.qmd
+        text: Home
+
+format: 
+  html:
+    theme: pulse

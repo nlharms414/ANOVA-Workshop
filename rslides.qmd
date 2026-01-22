@@ -1,0 +1,19 @@
+---
+title: "ANOVA in R"
+author: "Nicole Harms"
+date: today
+date-format: long
+format: 
+  revealjs:
+    theme: simple
+    slide-number: true
+---
+
+# ANOVA Overview
+
+## What is ANOVA?
+
+# Example
+
+Include some kind of example where they can follow along.
+

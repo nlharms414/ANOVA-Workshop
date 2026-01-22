@@ -1,0 +1,13 @@
+---
+title: "ANOVA Workshops for R and SAS"
+format: 
+  html: 
+    page-layout: full
+listing: 
+  contents: 
+    - "*.qmd"
+  type: grid
+  sort: "date"
+  fields: [title, date, author]
+---
+
