@@ -1,0 +1,11 @@
+---
+title: "ANOVA in R"
+author: "Nicole Harms"
+date: today
+date-format: long
+format: 
+  revealjs:
+    theme: simple
+    slide-number: true
+---
+
