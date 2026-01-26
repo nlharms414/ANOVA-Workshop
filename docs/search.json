@@ -2,7 +2,7 @@
   {
     "objectID": "r.html#what-is-anova",
     "href": "r.html#what-is-anova",
-    "title": "ANOVA in R",
+    "title": "Analysis of Variance in R",
     "section": "What is ANOVA?",
     "text": "What is ANOVA?"
   },
@@ -11,6 +11,55 @@
     "href": "index.html",
     "title": "ANOVA Workshops for R and SAS",
     "section": "",
-    "text": "ANOVA in R\n\n\n\nNicole Harms\n\n\nFeb 9, 2026\n\n\n\n\n\n\n\n\n\n\n\nANOVA in SAS\n\n\n\nNicole Harms\n\n\nFeb 16, 2026\n\n\n\n\n\n\n\n\nNo matching items"
+    "text": "Analysis of Variance in R\n\n\n\nNicole Harms\n\n\nFeb 9, 2026\n\n\n\n\n\n\n\n\n\n\n\nAnalysis of Variance in SAS\n\n\n\nNicole Harms\n\n\nFeb 16, 2026\n\n\n\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "r.html#when-would-i-use-anova",
+    "href": "r.html#when-would-i-use-anova",
+    "title": "Analysis of Variance in R",
+    "section": "When would I use ANOVA?",
+    "text": "When would I use ANOVA?\nYou might use ANOVA when…\n\nYou have a categorical, or ordinal independent variable with three or more factors (levels), and\nA continuous, dependent variable you are interested in measuring."
+  },
+  {
+    "objectID": "r.html#what-is-analysis-of-variance",
+    "href": "r.html#what-is-analysis-of-variance",
+    "title": "Analysis of Variance in R",
+    "section": "What is Analysis of Variance?",
+    "text": "What is Analysis of Variance?\nAnalysis of Variance (ANOVA) compares the means of three or more groups of an independent variable to determine if the group means are statistically different."
+  },
+  {
+    "objectID": "r.html#anova-process",
+    "href": "r.html#anova-process",
+    "title": "Analysis of Variance in R",
+    "section": "ANOVA Process",
+    "text": "ANOVA Process\nANOVA can be broken down into a series of “steps”:\n\nFor the"
+  },
+  {
+    "objectID": "r.html#anova-assumptions",
+    "href": "r.html#anova-assumptions",
+    "title": "Analysis of Variance in R",
+    "section": "ANOVA Assumptions",
+    "text": "ANOVA Assumptions\nTo use ANOVA, certain assumptions must be met, or results will not be reliable."
+  },
+  {
+    "objectID": "r.html#one-way-vs.-two-way-anova",
+    "href": "r.html#one-way-vs.-two-way-anova",
+    "title": "Analysis of Variance in R",
+    "section": "One-Way vs. Two-Way ANOVA",
+    "text": "One-Way vs. Two-Way ANOVA"
+  },
+  {
+    "objectID": "r.html#general-overview",
+    "href": "r.html#general-overview",
+    "title": "Analysis of Variance in R",
+    "section": "General Overview",
+    "text": "General Overview\nANOVA breaks down total data set variance into two components:\n\n\nWithin-group variance: How much do individual units within a group vary from each other?\nAmong-group variance: How much do the different groups vary from each other?"
+  },
+  {
+    "objectID": "r.html#when-would-i-use-anova-1",
+    "href": "r.html#when-would-i-use-anova-1",
+    "title": "Analysis of Variance in R",
+    "section": "When would I use ANOVA?",
+    "text": "When would I use ANOVA?\nExamples:\n\nComparing three diets, based on how much weight a person lost.\nDetermining if the time it takes to\nAnalyzing the effects of four varieties of corn, three levels of irrigation, and their interaction, on total yield."
   }
 ]

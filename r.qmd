@@ -1,5 +1,5 @@
 ---
-title: "ANOVA in R"
+title: "Analysis of Variance in R"
 author: "Nicole Harms"
 date: "02/09/2026"
 date-format: long
@@ -7,13 +7,55 @@ format:
   revealjs:
     theme: simple
     slide-number: true
+    logo: logo.jpg
 ---
 
-# ANOVA Overview
+# Intro. to Analysis of Variance
 
-## What is ANOVA?
+## What is Analysis of Variance? {.center}
+
+Analysis of Variance (ANOVA) compares the means of ***three or more groups*** of an ***independent variable*** to determine if the group means are statistically different. 
+
+## When would I use ANOVA? {.center}
+
+You might use ANOVA when...
+
+-   You have a categorical, or ordinal independent variable with three or more factors (levels), and
+
+-   A continuous, dependent variable you are interested in measuring.
+
+## When would I use ANOVA? {.center}
+
+Examples:
+
+-   Comparing three diets, based on how much weight a person lost.
+
+-   Determining if there is a difference in how 10 different medications affect blood pressure.
+
+-   Analyzing the effects of four varieties of corn, three levels of irrigation, and their interaction on total yield.
+
+## ANOVA Assumptions
+
+To use ANOVA, certain assumptions must be met, or results will not be reliable.
+
+## General Overview {.center}
+
+ANOVA breaks down total data set variance into two components:
+
+:::{.incremental}
+-   ***Within*****-group variance:** How much do individual units within a group vary from each other?
+
+-   ***Among*****-group variance:** How much do the different groups vary from each other?
+:::
+
+## ANOVA Process
+
+ANOVA can be broken down into a series of "steps":
+
+1.  For the
+
+## One-Way vs. Two-Way ANOVA
 
 # Example
 
 Include some kind of example where they can follow along.
-

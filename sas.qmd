@@ -1,5 +1,5 @@
 ---
-title: "ANOVA in SAS"
+title: "Analysis of Variance in SAS"
 author: "Nicole Harms"
 date: "02/16/2026"
 date-format: long
@@ -7,5 +7,6 @@ format:
   revealjs:
     theme: simple
     slide-number: true
+    logo: logo.jpg
 ---
 
