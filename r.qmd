@@ -14,13 +14,13 @@ format:
 
 ## What is Analysis of Variance? {.center}
 
-Analysis of Variance (ANOVA) compares the means of ***three or more groups*** of an ***independent variable*** to determine if the group means are statistically different. 
+Analysis of Variance (ANOVA) compares the means of some ***dependent variable*** across ***three or more groups*** of an ***independent variable*** to determine if the group means are statistically different. 
 
 ## When would I use ANOVA? {.center}
 
 You might use ANOVA when...
 
--   You have a categorical, or ordinal independent variable with three or more factors (levels), and
+-   You have a categorical independent variable with three or more factors (levels), and
 
 -   A continuous, dependent variable you are interested in measuring.
 
@@ -32,30 +32,142 @@ Examples:
 
 -   Determining if there is a difference in how 10 different medications affect blood pressure.
 
--   Analyzing the effects of four varieties of corn, three levels of irrigation, and their interaction on total yield.
+-   Analyzing the effects of three light levels, four moisture levels, and their interaction on a plant's growth.
+
+## One-Way vs. Two-Way ANOVA {.center}
+
+-   If two *independent categorical variables* need to be analyzed, this is referred to as a *two-way* ANOVA
+
+    -   This can be extended to more than two variables
+    
+-   Two-way ANOVA analyzes:
+
+    -   Each independent variable
+    
+    -   How they interact (if applicable)
+
+## When would I use ANOVA? {.center}
+
+Examples:
+
+-   Comparing three diets, based on how much weight a person lost.
+
+-   Determining if there is a difference in how 10 different medications affect blood pressure.
+
+-   **Analyzing the effects of three light levels, four moisture levels, and their interaction on a plant's growth.**
+
+. . . 
+
+The first two examples would use a **one-way** ANOVA. The third example would use a **two-way** ANOVA.
 
 ## ANOVA Assumptions
 
 To use ANOVA, certain assumptions must be met, or results will not be reliable.
 
-## General Overview {.center}
+::: incremental
+-   Data is normally distributed
+
+-   Observations are independent of each other
+
+-   Variances for each group are approximately equal
+:::
+
+## ANOVA Assumptions
+
+```{r}
+#| fig-align: center
+
+library(ggplot2)
+
+ggplot(data.frame(x = c(0,40)), aes(x = x)) +
+  stat_function(fun = dnorm, args = list(mean = 10, sd = 3), color = "#E69F00", linewidth = 1.5) +
+  stat_function(fun = dnorm, args = list(mean = 20, sd = 3), color = "#0072B2", linewidth = 1.5) +
+  stat_function(fun = dnorm, args = list(mean = 30, sd = 3), color = "#CC79A7", linewidth = 1.5) + 
+  geom_vline(xintercept = c(10,20,30), 
+             color = c("#E69F00","#0072B2","#CC79A7"), 
+             linetype = "dashed") +
+  geom_text(data = data.frame(
+    x = c(12, 22, 32),
+    y = c(0.05, 0.05, 0.05),
+    label = c("mu[1]", "mu[2]", "mu[3]")),
+    aes(x = x, y = y, label = label), parse = TRUE) +
+  theme(axis.line = element_line(colour = "black"),
+        panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank(),
+        panel.border = element_blank(),
+        panel.background = element_blank(),
+        axis.ticks.y = element_blank(),
+        axis.text.y = element_blank(),
+        axis.title.y = element_blank(),
+        axis.ticks.x = element_blank(),
+        axis.text.x = element_blank(),
+        axis.title.x = element_blank(),
+        axis.line.y = element_blank())
+```
+
+Here, each group is normally distributed with different means and equal variance.
+
+## ANOVA Assumptions
+
+```{r}
+#| fig-align: center
+
+ggplot(data.frame(x = c(0,40)), aes(x = x)) +
+  stat_function(fun = dnorm, args = list(mean = 10, sd = 3), color = "#E69F00", linewidth = 1.5) +
+  stat_function(fun = dnorm, args = list(mean = 20, sd = 8), color = "#0072B2", linewidth = 1.5) +
+  stat_function(fun = dnorm, args = list(mean = 30, sd = 5), color = "#CC79A7", linewidth = 1.5) + 
+  geom_vline(xintercept = c(10,20,30), 
+             color = c("#E69F00","#0072B2","#CC79A7"), 
+             linetype = "dashed") +
+  geom_text(data = data.frame(
+    x = c(12, 22, 32),
+    y = c(0.06, 0.06, 0.06),
+    label = c("mu[1]", "mu[2]", "mu[3]")),
+    aes(x = x, y = y, label = label), parse = TRUE) +
+  theme(axis.line = element_line(colour = "black"),
+        panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank(),
+        panel.border = element_blank(),
+        panel.background = element_blank(),
+        axis.ticks.y = element_blank(),
+        axis.text.y = element_blank(),
+        axis.title.y = element_blank(),
+        axis.ticks.x = element_blank(),
+        axis.text.x = element_blank(),
+        axis.title.x = element_blank(),
+        axis.line.y = element_blank())
+```
+
+Here, groups are normally distributed with different means, but variances are unequal.
+
+## How does ANOVA work? {.center}
 
 ANOVA breaks down total data set variance into two components:
 
 :::{.incremental}
 -   ***Within*****-group variance:** How much do individual units within a group vary from each other?
 
--   ***Among*****-group variance:** How much do the different groups vary from each other?
+-   ***Between*****-group variance:** How much do the different groups vary from each other?
 :::
 
-## ANOVA Process
+. . .
 
-ANOVA can be broken down into a series of "steps":
+If ***between-group variance*** is larger, this often suggests that the group means are different.
 
-1.  For the
+-   These variances are calculated using **sums of squares**
 
-## One-Way vs. Two-Way ANOVA
+## Sums of Squares: Which to use? {.center}
 
-# Example
+-   Multiple sums of squares methods exist
 
-Include some kind of example where they can follow along.
+-   The type of sums of squares you use depends on your scenario
+
+-   We will look at two types of sums of squares:
+
+    ::: incremental
+    -   Type I
+    
+    -   Type III
+    :::
+
+

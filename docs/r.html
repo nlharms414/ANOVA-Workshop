@@ -346,13 +346,13 @@ Nicole Harms
 </section>
 <section id="what-is-analysis-of-variance" class="slide level2 center">
 <h2>What is Analysis of Variance?</h2>
-<p>Analysis of Variance (ANOVA) compares the means of <strong><em>three or more groups</em></strong> of an <strong><em>independent variable</em></strong> to determine if the group means are statistically different.</p>
+<p>Analysis of Variance (ANOVA) compares the means of some <strong><em>dependent variable</em></strong> across <strong><em>three or more groups</em></strong> of an <strong><em>independent variable</em></strong> to determine if the group means are statistically different.</p>
 </section>
 <section id="when-would-i-use-anova" class="slide level2 center">
 <h2>When would I use ANOVA?</h2>
 <p>You might use ANOVA when…</p>
 <ul>
-<li><p>You have a categorical, or ordinal independent variable with three or more factors (levels), and</p></li>
+<li><p>You have a categorical independent variable with three or more factors (levels), and</p></li>
 <li><p>A continuous, dependent variable you are interested in measuring.</p></li>
 </ul>
 </section>
@@ -361,37 +361,86 @@ Nicole Harms
 <p>Examples:</p>
 <ul>
 <li><p>Comparing three diets, based on how much weight a person lost.</p></li>
-<li><p>Determining if the time it takes to</p></li>
-<li><p>Analyzing the effects of four varieties of corn, three levels of irrigation, and their interaction, on total yield.</p></li>
+<li><p>Determining if there is a difference in how 10 different medications affect blood pressure.</p></li>
+<li><p>Analyzing the effects of three light levels, four moisture levels, and their interaction on a plant’s growth.</p></li>
 </ul>
+</section>
+<section id="one-way-vs.-two-way-anova" class="slide level2 center">
+<h2>One-Way vs.&nbsp;Two-Way ANOVA</h2>
+<ul>
+<li><p>If two <em>independent categorical variables</em> need to be analyzed, this is referred to as a <em>two-way</em> ANOVA</p>
+<ul>
+<li>This can be extended to more than two variables</li>
+</ul></li>
+<li><p>Two-way ANOVA analyzes:</p>
+<ul>
+<li><p>Each independent variable</p></li>
+<li><p>How they interact (if applicable)</p></li>
+</ul></li>
+</ul>
+</section>
+<section id="when-would-i-use-anova-2" class="slide level2 center">
+<h2>When would I use ANOVA?</h2>
+<p>Examples:</p>
+<ul>
+<li><p>Comparing three diets, based on how much weight a person lost.</p></li>
+<li><p>Determining if there is a difference in how 10 different medications affect blood pressure.</p></li>
+<li><p><strong>Analyzing the effects of three light levels, four moisture levels, and their interaction on a plant’s growth.</strong></p></li>
+</ul>
+<div class="fragment">
+<p>The first two examples would use a <strong>one-way</strong> ANOVA. The third example would use a <strong>two-way</strong> ANOVA.</p>
+</div>
 </section>
 <section id="anova-assumptions" class="slide level2">
 <h2>ANOVA Assumptions</h2>
 <p>To use ANOVA, certain assumptions must be met, or results will not be reliable.</p>
+<div>
+<ul>
+<li class="fragment"><p>Data is normally distributed</p></li>
+<li class="fragment"><p>Observations are independent of each other</p></li>
+<li class="fragment"><p>Variances for each group are approximately equal</p></li>
+</ul>
+</div>
 </section>
-<section id="general-overview" class="slide level2 center">
-<h2>General Overview</h2>
+<section id="anova-assumptions-1" class="slide level2">
+<h2>ANOVA Assumptions</h2>
+
+<img data-src="r_files/figure-revealjs/unnamed-chunk-1-1.png" class="quarto-figure quarto-figure-center r-stretch" width="960"><p>Here, each group is normally distributed with different means and equal variance.</p>
+</section>
+<section id="anova-assumptions-2" class="slide level2">
+<h2>ANOVA Assumptions</h2>
+
+<img data-src="r_files/figure-revealjs/unnamed-chunk-2-1.png" class="quarto-figure quarto-figure-center r-stretch" width="960"><p>Here, groups are normally distributed with different means, but variances are unequal.</p>
+</section>
+<section id="how-does-anova-work" class="slide level2 center">
+<h2>How does ANOVA work?</h2>
 <p>ANOVA breaks down total data set variance into two components:</p>
 <div>
 <ul>
 <li class="fragment"><p><strong><em>Within</em>-group variance:</strong> How much do individual units within a group vary from each other?</p></li>
-<li class="fragment"><p><strong><em>Among</em>-group variance:</strong> How much do the different groups vary from each other?</p></li>
+<li class="fragment"><p><strong><em>Between</em>-group variance:</strong> How much do the different groups vary from each other?</p></li>
+</ul>
+</div>
+<div class="fragment">
+<p>If <strong><em>between-group variance</em></strong> is larger, this often suggests that the group means are different.</p>
+<ul>
+<li>These variances are calculated using <strong>sums of squares</strong></li>
 </ul>
 </div>
 </section>
-<section id="anova-process" class="slide level2">
-<h2>ANOVA Process</h2>
-<p>ANOVA can be broken down into a series of “steps”:</p>
-<ol type="1">
-<li>For the</li>
-</ol>
-</section>
-<section id="one-way-vs.-two-way-anova" class="slide level2">
-<h2>One-Way vs.&nbsp;Two-Way ANOVA</h2>
-</section></section>
-<section id="example" class="title-slide slide level1 center">
-<h1>Example</h1>
-<p>Include some kind of example where they can follow along.</p>
+<section id="sums-of-squares-which-to-use" class="slide level2 center">
+<h2>Sums of Squares: Which to use?</h2>
+<ul>
+<li><p>Multiple sums of squares methods exist</p></li>
+<li><p>The type of sums of squares you use depends on your scenario</p></li>
+<li><p>We will look at two types of sums of squares:</p>
+<div>
+<ul>
+<li class="fragment"><p>Type I</p></li>
+<li class="fragment"><p>Type III</p></li>
+</ul>
+</div></li>
+</ul>
 
 <div class="quarto-auto-generated-content">
 <p><img src="logo.jpg" class="slide-logo"></p>
@@ -399,7 +448,7 @@ Nicole Harms
 
 </div>
 </div>
-</section>
+</section></section>
     </div>
   </div>
 
@@ -610,6 +659,44 @@ Nicole Harms
         ]
       });
     </script>
+    
+    <script>
+      // htmlwidgets need to know to resize themselves when slides are shown/hidden.
+      // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
+      // slide changes (different for each slide format).
+      (function () {
+        // dispatch for htmlwidgets
+        function fireSlideEnter() {
+          const event = window.document.createEvent("Event");
+          event.initEvent("slideenter", true, true);
+          window.document.dispatchEvent(event);
+        }
+
+        function fireSlideChanged(previousSlide, currentSlide) {
+          fireSlideEnter();
+
+          // dispatch for shiny
+          if (window.jQuery) {
+            if (previousSlide) {
+              window.jQuery(previousSlide).trigger("hidden");
+            }
+            if (currentSlide) {
+              window.jQuery(currentSlide).trigger("shown");
+            }
+          }
+        }
+
+        // hookup for slidy
+        if (window.w3c_slidy) {
+          window.w3c_slidy.add_observer(function (slide_num) {
+            // slide_num starts at position 1
+            fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
+          });
+        }
+
+      })();
+    </script>
+
     <script id="quarto-html-after-body" type="application/javascript">
     window.document.addEventListener("DOMContentLoaded", function (event) {
       const toggleBodyColorMode = (bsSheetEl) => {

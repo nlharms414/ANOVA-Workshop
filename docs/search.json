@@ -18,48 +18,125 @@
     "href": "r.html#when-would-i-use-anova",
     "title": "Analysis of Variance in R",
     "section": "When would I use ANOVA?",
-    "text": "When would I use ANOVA?\nYou might use ANOVA when…\n\nYou have a categorical, or ordinal independent variable with three or more factors (levels), and\nA continuous, dependent variable you are interested in measuring."
+    "text": "When would I use ANOVA?\nYou might use ANOVA when…\n\nYou have a categorical independent variable with three or more factors (levels), and\nA continuous, dependent variable you are interested in measuring."
   },
   {
     "objectID": "r.html#what-is-analysis-of-variance",
     "href": "r.html#what-is-analysis-of-variance",
     "title": "Analysis of Variance in R",
     "section": "What is Analysis of Variance?",
-    "text": "What is Analysis of Variance?\nAnalysis of Variance (ANOVA) compares the means of three or more groups of an independent variable to determine if the group means are statistically different."
+    "text": "What is Analysis of Variance?\nAnalysis of Variance (ANOVA) compares the means of some dependent variable across three or more groups of an independent variable to determine if the group means are statistically different."
   },
   {
     "objectID": "r.html#anova-process",
     "href": "r.html#anova-process",
     "title": "Analysis of Variance in R",
     "section": "ANOVA Process",
-    "text": "ANOVA Process\nANOVA can be broken down into a series of “steps”:\n\nFor the"
+    "text": "ANOVA Process\nANOVA can be broken down into a series of steps:"
   },
   {
     "objectID": "r.html#anova-assumptions",
     "href": "r.html#anova-assumptions",
     "title": "Analysis of Variance in R",
     "section": "ANOVA Assumptions",
-    "text": "ANOVA Assumptions\nTo use ANOVA, certain assumptions must be met, or results will not be reliable."
+    "text": "ANOVA Assumptions\nTo use ANOVA, certain assumptions must be met, or results will not be reliable.\n\n\nData is normally distributed\nObservations are independent of each other\nVariances for each group are approximately equal"
   },
   {
     "objectID": "r.html#one-way-vs.-two-way-anova",
     "href": "r.html#one-way-vs.-two-way-anova",
     "title": "Analysis of Variance in R",
     "section": "One-Way vs. Two-Way ANOVA",
-    "text": "One-Way vs. Two-Way ANOVA"
+    "text": "One-Way vs. Two-Way ANOVA\n\nIf two independent categorical variables need to be analyzed, this is referred to as a two-way ANOVA\n\nThis can be extended to more than two variables\n\nTwo-way ANOVA analyzes:\n\nEach independent variable\nHow they interact (if applicable)"
   },
   {
     "objectID": "r.html#general-overview",
     "href": "r.html#general-overview",
     "title": "Analysis of Variance in R",
     "section": "General Overview",
-    "text": "General Overview\nANOVA breaks down total data set variance into two components:\n\n\nWithin-group variance: How much do individual units within a group vary from each other?\nAmong-group variance: How much do the different groups vary from each other?"
+    "text": "General Overview\nANOVA breaks down total data set variance into two components:\n\n\nWithin-group variance: How much do individual units within a group vary from each other?\nBetween-group variance: How much do the different groups vary from each other?\n\n\n\nIf between-group variance is larger, this often suggests that the group means are different."
   },
   {
     "objectID": "r.html#when-would-i-use-anova-1",
     "href": "r.html#when-would-i-use-anova-1",
     "title": "Analysis of Variance in R",
     "section": "When would I use ANOVA?",
-    "text": "When would I use ANOVA?\nExamples:\n\nComparing three diets, based on how much weight a person lost.\nDetermining if the time it takes to\nAnalyzing the effects of four varieties of corn, three levels of irrigation, and their interaction, on total yield."
+    "text": "When would I use ANOVA?\nExamples:\n\nComparing three diets, based on how much weight a person lost.\nDetermining if there is a difference in how 10 different medications affect blood pressure.\nAnalyzing the effects of three light levels, four moisture levels, and their interaction on a plant’s growth."
+  },
+  {
+    "objectID": "r.html#anova-assumptions-1",
+    "href": "r.html#anova-assumptions-1",
+    "title": "Analysis of Variance in R",
+    "section": "ANOVA Assumptions",
+    "text": "ANOVA Assumptions\n\nHere, each group is normally distributed with different means and equal variance."
+  },
+  {
+    "objectID": "r.html#anova-assumptions-2",
+    "href": "r.html#anova-assumptions-2",
+    "title": "Analysis of Variance in R",
+    "section": "ANOVA Assumptions",
+    "text": "ANOVA Assumptions\n\nHere, groups are normally distributed with different means, but variances are unequal."
+  },
+  {
+    "objectID": "r.html#how-does-anova-work",
+    "href": "r.html#how-does-anova-work",
+    "title": "Analysis of Variance in R",
+    "section": "How does ANOVA work?",
+    "text": "How does ANOVA work?\nANOVA breaks down total data set variance into two components:\n\n\nWithin-group variance: How much do individual units within a group vary from each other?\nBetween-group variance: How much do the different groups vary from each other?\n\n\n\nIf between-group variance is larger, this often suggests that the group means are different.\n\nThese variances are calculated using sums of squares"
+  },
+  {
+    "objectID": "r.html#example-anova-table",
+    "href": "r.html#example-anova-table",
+    "title": "Analysis of Variance in R",
+    "section": "Example ANOVA Table",
+    "text": "Example ANOVA Table"
+  },
+  {
+    "objectID": "r.html#when-would-i-use-anova-2",
+    "href": "r.html#when-would-i-use-anova-2",
+    "title": "Analysis of Variance in R",
+    "section": "When would I use ANOVA?",
+    "text": "When would I use ANOVA?\nExamples:\n\nComparing three diets, based on how much weight a person lost.\nDetermining if there is a difference in how 10 different medications affect blood pressure.\nAnalyzing the effects of three light levels, four moisture levels, and their interaction on a plant’s growth.\n\n\nThe first two examples would use a one-way ANOVA. The third example would use a two-way ANOVA."
+  },
+  {
+    "objectID": "r.html#two-way-anova-table-example",
+    "href": "r.html#two-way-anova-table-example",
+    "title": "Analysis of Variance in R",
+    "section": "Two-Way ANOVA Table Example",
+    "text": "Two-Way ANOVA Table Example"
+  },
+  {
+    "objectID": "r.html#caution",
+    "href": "r.html#caution",
+    "title": "Analysis of Variance in R",
+    "section": "Caution!",
+    "text": "Caution!"
+  },
+  {
+    "objectID": "r.html#different-types-of-sums-of-squares",
+    "href": "r.html#different-types-of-sums-of-squares",
+    "title": "Analysis of Variance in R",
+    "section": "Different Types of Sums of Squares",
+    "text": "Different Types of Sums of Squares\n\nMultiple sums of squares methods exist\nThey type of sums of squares you use depends on your scenario\nWe will look at two types of sums of squares:\n\nType I\nType III"
+  },
+  {
+    "objectID": "r.html#sums-of-squares-which-to-use",
+    "href": "r.html#sums-of-squares-which-to-use",
+    "title": "Analysis of Variance in R",
+    "section": "Sums of Squares: Which to use?",
+    "text": "Sums of Squares: Which to use?\n\nMultiple sums of squares methods exist\nThe type of sums of squares you use depends on your scenario\nWe will look at two types of sums of squares:\n\n\nType I\nType III"
+  },
+  {
+    "objectID": "r.html#skeleton-one-way-anova-table",
+    "href": "r.html#skeleton-one-way-anova-table",
+    "title": "Analysis of Variance in R",
+    "section": "“Skeleton” One-Way ANOVA Table",
+    "text": "“Skeleton” One-Way ANOVA Table"
+  },
+  {
+    "objectID": "r.html#skeleton-two-way-anova-table",
+    "href": "r.html#skeleton-two-way-anova-table",
+    "title": "Analysis of Variance in R",
+    "section": "“Skeleton” Two-Way ANOVA Table",
+    "text": "“Skeleton” Two-Way ANOVA Table"
   }
 ]
