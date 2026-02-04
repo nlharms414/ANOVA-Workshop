@@ -41,13 +41,33 @@ ggplot(data.frame(x = c(0,40)), aes(x = x)) +
         axis.text.y = element_blank(),
         axis.title.y = element_blank())
 
-set.seed(2000)
+set.seed(4444)
 growth <- data.frame(a = round(rnorm(6,12,3),2),
                      b = round(rnorm(6,18,3),2),
                      c = round(rnorm(6,24,3),2))
 growth
-
 growth <- data.frame(a = growth$a,
                      b = growth$b,
                      c = growth$c)
-growth
+data <- c(growth$a, growth$b, growth$c)
+hist(data)
+
+table <- array(data = c(12,14,13,15), dim = c(2,2), dimnames = list(c("A1", "A2"),
+                                                                      c("B1", "B2")))
+table
+
+inter <- data.frame(A = rep(c("A1","A2"),each = 2),
+                    B = rep(c("B1","B2"),2),
+                    Data = c(12,13,14,15))
+
+interaction.plot(x.factor = inter$A,
+                 trace.factor = inter$B, 
+                 response = inter$Data, fun = mean,
+                 xlab = "Effect A",ylab = "Data", trace.label = "Effect B",
+                 col = c("red","blue"), lty = 1, pch = 2)
+
+
+
+
+
+

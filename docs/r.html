@@ -446,19 +446,19 @@ Nicole Harms
 <p>Say we have the following sample data.</p>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a><span class="co"># Reading in data</span></span>
-<span id="cb1-2"><a></a>growth <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">plant =</span> <span class="fu">c</span>(<span class="st">"plant 1"</span>,<span class="st">"plant 2"</span>,<span class="st">"plant 3"</span>,<span class="st">"plant 4"</span>,<span class="st">"plant 5"</span>,<span class="st">"plant6"</span>),</span>
-<span id="cb1-3"><a></a>                     <span class="at">low =</span> <span class="fu">c</span>(<span class="fl">18.51</span>,<span class="fl">5.99</span>,<span class="fl">7.06</span>,<span class="fl">14.02</span>,<span class="fl">14.96</span>,<span class="fl">13.56</span>),</span>
-<span id="cb1-4"><a></a>                     <span class="at">medium =</span> <span class="fu">c</span>(<span class="fl">19.19</span>,<span class="fl">19.09</span>,<span class="fl">17.90</span>,<span class="fl">21.47</span>,<span class="fl">20.38</span>,<span class="fl">14.58</span>),</span>
+<span id="cb1-2"><a></a>growth <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">plant =</span> <span class="fu">c</span>(<span class="st">"plant 1"</span>,<span class="st">"plant 2"</span>,<span class="st">"plant 3"</span>,<span class="st">"plant 4"</span>,<span class="st">"plant 5"</span>,<span class="st">"plant 6"</span>),</span>
+<span id="cb1-3"><a></a>                     <span class="at">low =</span> <span class="fu">c</span>(<span class="fl">18.51</span>,<span class="fl">5.99</span>,<span class="fl">14.02</span>,<span class="fl">7.06</span>,<span class="fl">14.96</span>,<span class="fl">13.56</span>),</span>
+<span id="cb1-4"><a></a>                     <span class="at">med =</span> <span class="fu">c</span>(<span class="fl">19.19</span>,<span class="fl">19.09</span>,<span class="fl">17.90</span>,<span class="fl">21.47</span>,<span class="fl">20.38</span>,<span class="fl">14.58</span>),</span>
 <span id="cb1-5"><a></a>                     <span class="at">high =</span> <span class="fu">c</span>(<span class="fl">19.23</span>,<span class="fl">24.27</span>,<span class="fl">27.34</span>,<span class="fl">22.23</span>,<span class="fl">22.92</span>,<span class="fl">28.77</span>))</span>
 <span id="cb1-6"><a></a>growth</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>    plant   low medium  high
-1 plant 1 18.51  19.19 19.23
-2 plant 2  5.99  19.09 24.27
-3 plant 3  7.06  17.90 27.34
-4 plant 4 14.02  21.47 22.23
-5 plant 5 14.96  20.38 22.92
-6  plant6 13.56  14.58 28.77</code></pre>
+<pre><code>    plant   low   med  high
+1 plant 1 18.51 19.19 19.23
+2 plant 2  5.99 19.09 24.27
+3 plant 3 14.02 17.90 27.34
+4 plant 4  7.06 21.47 22.23
+5 plant 5 14.96 20.38 22.92
+6 plant 6 13.56 14.58 28.77</code></pre>
 </div>
 </div>
 <div class="fragment">
@@ -491,10 +491,10 @@ Nicole Harms
   plant   light_level growth
   &lt;chr&gt;   &lt;chr&gt;        &lt;dbl&gt;
 1 plant 1 low          18.5 
-2 plant 1 medium       19.2 
+2 plant 1 med          19.2 
 3 plant 1 high         19.2 
 4 plant 2 low           5.99
-5 plant 2 medium       19.1 
+5 plant 2 med          19.1 
 6 plant 2 high         24.3 </code></pre>
 </div>
 </div>
@@ -528,7 +528,10 @@ Nicole Harms
 <section id="checking-for-normality-1" class="slide level2 center">
 <h2>Checking for Normality</h2>
 <p>Let’s see if our data looks normal by making a histogram.</p>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a></a><span class="fu">hist</span>(growth_long<span class="sc">$</span>growth)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 
+</div>
 <img data-src="r_files/figure-revealjs/unnamed-chunk-7-1.png" class="quarto-figure quarto-figure-center r-stretch" width="960"><div class="fragment">
 <p>Our data looks fairly normal, so we can proceed with an ANOVA. We will assume that the variances are approximately equal.</p>
 </div>
@@ -551,23 +554,35 @@ Nicole Harms
 <p>An ANOVA tests the following hypotheses:</p>
 <div>
 <ul>
-<li class="fragment"><p><span class="math inline">\(H_0:\)</span>All group means are equal.</p></li>
-<li class="fragment"><p><span class="math inline">\(H_A:\)</span>At least one group mean is different.</p></li>
+<li class="fragment"><p><span class="math inline">\(H_0:\)</span> All group means are equal.</p></li>
+<li class="fragment"><p><span class="math inline">\(H_A:\)</span> At least one group mean is different.</p></li>
 </ul>
 </div>
 <div class="fragment">
 <p>We test these hypotheses with an F-test.</p>
 <ul>
-<li>If we get a p-value &lt; 0.05, then we have evidence in favor of <span class="math inline">\(H_A:\)</span></li>
+<li>If we get a p-value &lt; 0.05, then we have evidence in favor of <span class="math inline">\(H_A\)</span></li>
 </ul>
 </div>
 </section>
 <section id="anova-in-r" class="slide level2 center">
 <h2>ANOVA In R</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb6" data-code-line-numbers="|2|3|"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a></a><span class="co"># Run an ANOVA</span></span>
-<span id="cb6-2"><a></a>model <span class="ot">&lt;-</span> <span class="fu">lm</span>(growth <span class="sc">~</span> light_level, <span class="at">data =</span> growth_long)</span>
-<span id="cb6-3"><a></a><span class="fu">anova</span>(model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb7" data-code-line-numbers="|2|3|"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a></a><span class="co"># Run an ANOVA</span></span>
+<span id="cb7-2"><a></a>model <span class="ot">&lt;-</span> <span class="fu">aov</span>(growth <span class="sc">~</span> light_level, <span class="at">data =</span> growth_long)</span>
+<span id="cb7-3"><a></a><span class="fu">summary</span>(model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>            Df Sum Sq Mean Sq F value   Pr(&gt;F)    
+light_level  2  417.2  208.60   15.13 0.000253 ***
+Residuals   15  206.9   13.79                     
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+</div>
+</section>
+<section id="interpreting-the-results" class="slide level2 center">
+<h2>Interpreting the Results</h2>
+<div class="cell">
 <div class="cell-output cell-output-stdout">
 <pre><code>Analysis of Variance Table
 
@@ -579,6 +594,42 @@ Residuals   15 206.86   13.79
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
 </div>
+<ul>
+<li><p><code>Pr(&gt;F)</code>: This is the p-value from the F-test for <code>light_level</code></p></li>
+<li><p>Here, our p-value is extremely small, so we can conclude that at least one of the groups has a different mean.</p></li>
+<li><p>The question remains: which groups are different?</p></li>
+</ul>
+</section>
+<section id="tukeys-hsd-test" class="slide level2 center">
+<h2>Tukey’s HSD Test</h2>
+<p>Tukey’s honestly significant difference (HSD) test allows us to see which groups are significantly different from each other</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb10-1"><a></a><span class="co"># Tukey's HSD test</span></span>
+<span id="cb10-2"><a></a><span class="fu">TukeyHSD</span>(model, <span class="at">conf.level =</span> <span class="fl">0.95</span>) <span class="co"># default to 95% confidence</span></span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Tukey’s HSD test will compare every combination of groups and determine which pairs are statistically different from each other.</p>
+</section>
+<section id="tukeys-hsd-test-results" class="slide level2 center">
+<h2>Tukey’s HSD Test Results</h2>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>  Tukey multiple comparisons of means
+    95% family-wise confidence level
+
+Fit: aov(formula = growth ~ light_level, data = growth_long)
+
+$light_level
+               diff         lwr        upr     p adj
+low-high -11.776667 -17.3456764 -6.2076569 0.0001726
+med-high  -5.358333 -10.9273431  0.2106764 0.0601294
+med-low    6.418333   0.8493236 11.9873431 0.0232804</code></pre>
+</div>
+</div>
+<ul>
+<li><code>diff</code> gives the difference in means for the two groups</li>
+<li><code>p adj</code> gives the p-value for the difference in two groups</li>
+<li>Here, we see that the low &amp; high and low &amp; medium groups are statiscially different, but not medium &amp; high</li>
+</ul>
 </section>
 <section id="one-way-vs.-two-way-anova" class="slide level2 center">
 <h2>One-Way vs.&nbsp;Two-Way ANOVA</h2>
@@ -606,46 +657,112 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <section id="new-data-set" class="slide level2 center">
 <h2>New Data Set</h2>
 <div class="cell">
+<div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a></a>growth2 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">plant =</span> <span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>),</span>
+<span id="cb12-2"><a></a>                     <span class="at">fertilizer =</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"Y"</span>,<span class="st">"N"</span>),<span class="at">each=</span><span class="dv">3</span>),</span>
+<span id="cb12-3"><a></a>                     <span class="at">low =</span> <span class="fu">c</span>(<span class="fl">18.51</span>,<span class="fl">5.99</span>,<span class="fl">14.02</span>,<span class="fl">7.06</span>,<span class="fl">14.96</span>,<span class="fl">13.56</span>),</span>
+<span id="cb12-4"><a></a>                     <span class="at">med =</span> <span class="fu">c</span>(<span class="fl">19.19</span>,<span class="fl">19.09</span>,<span class="fl">17.90</span>,<span class="fl">21.47</span>,<span class="fl">20.38</span>,<span class="fl">14.58</span>),</span>
+<span id="cb12-5"><a></a>                     <span class="at">high =</span> <span class="fu">c</span>(<span class="fl">19.23</span>,<span class="fl">24.27</span>,<span class="fl">27.34</span>,<span class="fl">22.23</span>,<span class="fl">22.92</span>,<span class="fl">28.77</span>))</span>
+<span id="cb12-6"><a></a>growth_long2 <span class="ot">&lt;-</span> <span class="fu">pivot_longer</span>(<span class="at">data =</span> growth2,</span>
+<span id="cb12-7"><a></a>                            <span class="at">cols =</span> <span class="st">"low"</span><span class="sc">:</span><span class="st">"high"</span>,</span>
+<span id="cb12-8"><a></a>                            <span class="at">names_to =</span> <span class="st">"light_level"</span>,</span>
+<span id="cb12-9"><a></a>                            <span class="at">values_to =</span> <span class="st">"growth"</span>)</span>
+<span id="cb12-10"><a></a><span class="fu">head</span>(growth_long2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 6 × 4
   plant fertilizer light_level growth
   &lt;int&gt; &lt;chr&gt;      &lt;chr&gt;        &lt;dbl&gt;
 1     1 Y          low          18.5 
-2     1 Y          medium       19.2 
+2     1 Y          med          19.2 
 3     1 Y          high         19.2 
-4     2 N          low           5.99
-5     2 N          medium       19.1 
-6     2 N          high         24.3 </code></pre>
+4     2 Y          low           5.99
+5     2 Y          med          19.1 
+6     2 Y          high         24.3 </code></pre>
 </div>
 </div>
 </section>
 <section id="two-way-anova-in-r" class="slide level2 center">
 <h2>Two-Way ANOVA in R</h2>
 <div class="cell">
-<div class="sourceCode cell-code" id="cb9" data-code-line-numbers="|2|3|"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a></a><span class="co"># Run a two-way ANOVA</span></span>
-<span id="cb9-2"><a></a>model2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(growth <span class="sc">~</span> light_level<span class="sc">*</span>fertilizer, <span class="at">data =</span> growth_long2)</span>
-<span id="cb9-3"><a></a><span class="fu">anova</span>(model2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="sourceCode cell-code" id="cb14" data-code-line-numbers="|2|"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb14-1"><a></a><span class="co"># Run a two-way ANOVA</span></span>
+<span id="cb14-2"><a></a>model2 <span class="ot">&lt;-</span> <span class="fu">aov</span>(growth <span class="sc">~</span> light_level<span class="sc">*</span>fertilizer, <span class="at">data =</span> growth_long2)</span>
+<span id="cb14-3"><a></a><span class="fu">summary</span>(model2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>Analysis of Variance Table
-
-Response: growth
-                       Df Sum Sq Mean Sq F value    Pr(&gt;F)    
-light_level             2 417.19 208.597 13.0163 0.0009866 ***
-fertilizer              1   0.68   0.684  0.0427 0.8397386    
-light_level:fertilizer  2  13.86   6.931  0.4325 0.6586154    
-Residuals              12 192.31  16.026                      
+<pre><code>                       Df Sum Sq Mean Sq F value  Pr(&gt;F)   
+light_level             2  417.2  208.60  12.281 0.00125 **
+fertilizer              1    0.0    0.01   0.000 0.98257   
+light_level:fertilizer  2    3.0    1.51   0.089 0.91544   
+Residuals              12  203.8   16.99                   
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
 </div>
-</section>
-<section id="sums-of-squares-which-to-use" class="slide level2 center">
-<h2>Sums of Squares: Which to use?</h2>
 <ul>
-<li><p>Multiple sums of squares methods exist</p></li>
-<li><p>The type of sums of squares you use depends on your scenario</p></li>
-<li><p>The previous examples used Type I sums of squares</p></li>
-<li><p>If you have <strong>unbalanced</strong> data, you’ll want to use Type III sums of squares</p></li>
+<li><p><code>light_level:fertilizer</code> gives the analysis for the interaction.</p></li>
+<li><p>The p-value for the interaction is 0.915, indicating there is no evidence of an interaction between fertilizer and light level.</p></li>
+</ul>
+</section>
+<section id="caution-in-the-face-of-interaction" class="slide level2 center">
+<h2>Caution in the face of interaction!</h2>
+<ul>
+<li><p>If interaction is determined statistically significant via an ANOVA, then generally we cannot make any assumptions about the individual effects</p></li>
+<li><p>A useful tool is an <strong>interaction plot</strong></p></li>
+<li><p>This helps us visualize how two effects (variables) are related.</p></li>
+</ul>
+</section>
+<section id="interaction-plot-no-interaction" class="slide level2 center">
+<h2>Interaction Plot: No Interaction</h2>
+
+<img data-src="r_files/figure-revealjs/unnamed-chunk-14-1.png" width="960" class="r-stretch"></section>
+<section id="interaction-plot-interaction-is-present" class="slide level2 center">
+<h2>Interaction Plot: Interaction is Present</h2>
+
+<img data-src="r_files/figure-revealjs/unnamed-chunk-15-1.png" width="960" class="r-stretch"><p>Both plots indicate interaction is present.</p>
+</section>
+<section id="creating-an-interaction-plot" class="slide level2 center">
+<h2>Creating an Interaction Plot</h2>
+<div class="cell" data-layout-align="center">
+<div class="sourceCode cell-code" id="cb16" data-code-line-numbers="|2|3|4|5|6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb16-1"><a></a><span class="co"># Interaction plot for light level and fertilizer</span></span>
+<span id="cb16-2"><a></a><span class="fu">interaction.plot</span>(<span class="at">x.factor =</span> growth_long2<span class="sc">$</span>fertilizer,</span>
+<span id="cb16-3"><a></a>                 <span class="at">trace.factor =</span> growth_long2<span class="sc">$</span>light_level, </span>
+<span id="cb16-4"><a></a>                 <span class="at">response =</span> growth_long2<span class="sc">$</span>growth, <span class="at">fun =</span> mean,</span>
+<span id="cb16-5"><a></a>                 <span class="at">xlab =</span> <span class="st">"Fertilizer"</span>, <span class="at">ylab =</span> <span class="st">"Growth (cm)"</span>, <span class="at">trace.label =</span> <span class="st">"Light Level"</span>,</span>
+<span id="cb16-6"><a></a>                 <span class="at">col =</span> <span class="fu">c</span>(<span class="st">"#E69F00"</span>,<span class="st">"#0072B2"</span>,<span class="st">"#CC79A7"</span>), <span class="at">lty =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="creating-an-interaction-plot-1" class="slide level2 center">
+<h2>Creating an Interaction Plot</h2>
+
+<img data-src="r_files/figure-revealjs/unnamed-chunk-17-1.png" width="960" class="r-stretch"><p>This interaction plot shows little to no interaction between fertilizer and light level, which was confimed by the ANOVA.</p>
+</section>
+<section id="tukeys-hsd-test-for-two-way-anova" class="slide level2 center">
+<h2>Tukey’s HSD Test for Two-Way ANOVA</h2>
+<p>Here, I’ve only printed the <code>TukeyHSD()</code> output for the light level and fertilizer interaction.</p>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code>                      diff         lwr        upr      p adj
+low:N-high:N  -12.78000000 -24.0829208 -1.4770792 0.02385754
+med:N-high:N   -5.83000000 -17.1329208  5.4729208 0.53773921
+high:Y-high:N  -1.02666667 -12.3295874 10.2762541 0.99954343
+low:Y-high:N  -11.80000000 -23.1029208 -0.4970792 0.03901261
+med:Y-high:N   -5.91333333 -17.2162541  5.3895874 0.52382786
+med:N-low:N     6.95000000  -4.3529208 18.2529208 0.36417249
+high:Y-low:N   11.75333333   0.4504126 23.0562541 0.03993434
+low:Y-low:N     0.98000000 -10.3229208 12.2829208 0.99963586
+med:Y-low:N     6.86666667  -4.4362541 18.1695874 0.37585455
+high:Y-med:N    4.80333333  -6.4995874 16.1062541 0.71159726
+low:Y-med:N    -5.97000000 -17.2729208  5.3329208 0.51443228
+med:Y-med:N    -0.08333333 -11.3862541 11.2195874 1.00000000
+low:Y-high:Y  -10.77333333 -22.0762541  0.5295874 0.06500207
+med:Y-high:Y   -4.88666667 -16.1895874  6.4162541 0.69777545
+med:Y-low:Y     5.88666667  -5.4162541 17.1895874 0.52826782</code></pre>
+</div>
+</div>
+</section>
+<section id="final-thoughts" class="slide level2 center">
+<h2>Final Thoughts</h2>
+<ul>
+<li><p>If you ever encounter a scenario where <code>residual</code> degrees of freedom (<code>df</code>) are equal to or smaller than any main effect or interaction, ANOVA results won’t be reliable</p></li>
+<li><p>If you are ever worried that variances between groups</p></li>
 </ul>
 
 <div class="quarto-auto-generated-content">
