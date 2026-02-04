@@ -144,7 +144,7 @@
     "href": "r.html#anova-in-r",
     "title": "Analysis of Variance in R",
     "section": "ANOVA In R",
-    "text": "ANOVA In R\n\n# Run an ANOVA\nmodel &lt;- lm(growth ~ light_level, data = growth_long)\nanova(model)\n\nAnalysis of Variance Table\n\nResponse: growth\n            Df Sum Sq Mean Sq F value    Pr(&gt;F)    \nlight_level  2 451.49 225.743  17.426 0.0001225 ***\nResiduals   15 194.31  12.954                      \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1"
+    "text": "ANOVA In R\n\n# Run an ANOVA\nmodel &lt;- lm(growth ~ light_level, data = growth_long)\nanova(model)\n\nAnalysis of Variance Table\n\nResponse: growth\n            Df Sum Sq Mean Sq F value    Pr(&gt;F)    \nlight_level  2 417.19  208.60  15.126 0.0002531 ***\nResiduals   15 206.86   13.79                      \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1"
   },
   {
     "objectID": "r.html#example",
@@ -158,7 +158,7 @@
     "href": "r.html#example-data",
     "title": "Analysis of Variance in R",
     "section": "Example Data",
-    "text": "Example Data\nSay we have the following sample data.\n\n# Reading in data\ngrowth &lt;- data.frame(plant = c(\"plant 1\",\"plant 2\",\"plant 3\",\"plant 4\",\"plant 5\",\"plant6\"),\n                     low = c(9.44,10.94,14.67,17.22,14.75,8.47),\n                     medium = c(12.18,24.28,18.68,21.53,23.68,20.51),\n                     high = c(28.05,23.42,24.58,27.25,20.50,24.57))\ngrowth\n\n    plant   low medium  high\n1 plant 1  9.44  12.18 28.05\n2 plant 2 10.94  24.28 23.42\n3 plant 3 14.67  18.68 24.58\n4 plant 4 17.22  21.53 27.25\n5 plant 5 14.75  23.68 20.50\n6  plant6  8.47  20.51 24.57\n\n\n\nNote: This data is in wide format, but we’ll need it in long format in order to analyze it."
+    "text": "Example Data\nSay we have the following sample data.\n\n# Reading in data\ngrowth &lt;- data.frame(plant = c(\"plant 1\",\"plant 2\",\"plant 3\",\"plant 4\",\"plant 5\",\"plant6\"),\n                     low = c(18.51,5.99,7.06,14.02,14.96,13.56),\n                     medium = c(19.19,19.09,17.90,21.47,20.38,14.58),\n                     high = c(19.23,24.27,27.34,22.23,22.92,28.77))\ngrowth\n\n    plant   low medium  high\n1 plant 1 18.51  19.19 19.23\n2 plant 2  5.99  19.09 24.27\n3 plant 3  7.06  17.90 27.34\n4 plant 4 14.02  21.47 22.23\n5 plant 5 14.96  20.38 22.92\n6  plant6 13.56  14.58 28.77\n\n\n\nNote: This data is in wide format, but we’ll need it in long format in order to analyze it."
   },
   {
     "objectID": "r.html#hypotheses",
@@ -179,7 +179,7 @@
     "href": "r.html#quick-tip-reformatting-data-1",
     "title": "Analysis of Variance in R",
     "section": "Quick Tip! Reformatting Data",
-    "text": "Quick Tip! Reformatting Data\nNext, use pivot_longer() to restructure the data.\n\n# Putting data in long format\nlibrary(tidyr)\ngrowth_long &lt;- pivot_longer(data = growth,\n                            cols = \"low\":\"high\",\n                            names_to = \"light_level\",\n                            values_to = \"growth\")\nhead(growth_long)\n\n# A tibble: 6 × 3\n  plant   light_level growth\n  &lt;chr&gt;   &lt;chr&gt;        &lt;dbl&gt;\n1 plant 1 low           9.44\n2 plant 1 medium       12.2 \n3 plant 1 high         28.0 \n4 plant 2 low          10.9 \n5 plant 2 medium       24.3 \n6 plant 2 high         23.4"
+    "text": "Quick Tip! Reformatting Data\nNext, use pivot_longer() to restructure the data.\n\n# Putting data in long format\nlibrary(tidyr)\ngrowth_long &lt;- pivot_longer(data = growth,\n                            cols = \"low\":\"high\",\n                            names_to = \"light_level\",\n                            values_to = \"growth\")\nhead(growth_long)\n\n# A tibble: 6 × 3\n  plant   light_level growth\n  &lt;chr&gt;   &lt;chr&gt;        &lt;dbl&gt;\n1 plant 1 low          18.5 \n2 plant 1 medium       19.2 \n3 plant 1 high         19.2 \n4 plant 2 low           5.99\n5 plant 2 medium       19.1 \n6 plant 2 high         24.3"
   },
   {
     "objectID": "r.html#checking-for-normality",
@@ -214,13 +214,13 @@
     "href": "r.html#new-data-set",
     "title": "Analysis of Variance in R",
     "section": "New Data Set",
-    "text": "New Data Set\n\n\n# A tibble: 6 × 4\n  plant fertilizer light_level growth\n  &lt;int&gt; &lt;chr&gt;      &lt;chr&gt;        &lt;dbl&gt;\n1     1 Y          low           9.44\n2     1 Y          medium       12.2 \n3     1 Y          high         28.0 \n4     2 N          low          10.9 \n5     2 N          medium       24.3 \n6     2 N          high         23.4"
+    "text": "New Data Set\n\n\n# A tibble: 6 × 4\n  plant fertilizer light_level growth\n  &lt;int&gt; &lt;chr&gt;      &lt;chr&gt;        &lt;dbl&gt;\n1     1 Y          low          18.5 \n2     1 Y          medium       19.2 \n3     1 Y          high         19.2 \n4     2 N          low           5.99\n5     2 N          medium       19.1 \n6     2 N          high         24.3"
   },
   {
     "objectID": "r.html#two-way-anova-in-r",
     "href": "r.html#two-way-anova-in-r",
     "title": "Analysis of Variance in R",
     "section": "Two-Way ANOVA in R",
-    "text": "Two-Way ANOVA in R\n\n# Run a two-way ANOVA\nmodel2 &lt;- lm(growth ~ light_level*fertilizer, data = growth_long2)\nanova(model2)\n\nAnalysis of Variance Table\n\nResponse: growth\n                       Df Sum Sq Mean Sq F value    Pr(&gt;F)    \nlight_level             2 451.49 225.743 15.9712 0.0004147 ***\nfertilizer              1   7.55   7.553  0.5344 0.4788032    \nlight_level:fertilizer  2  17.15   8.573  0.6065 0.5611346    \nResiduals              12 169.61  14.134                      \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1"
+    "text": "Two-Way ANOVA in R\n\n# Run a two-way ANOVA\nmodel2 &lt;- lm(growth ~ light_level*fertilizer, data = growth_long2)\nanova(model2)\n\nAnalysis of Variance Table\n\nResponse: growth\n                       Df Sum Sq Mean Sq F value    Pr(&gt;F)    \nlight_level             2 417.19 208.597 13.0163 0.0009866 ***\nfertilizer              1   0.68   0.684  0.0427 0.8397386    \nlight_level:fertilizer  2  13.86   6.931  0.4325 0.6586154    \nResiduals              12 192.31  16.026                      \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1"
   }
 ]

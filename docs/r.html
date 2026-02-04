@@ -447,18 +447,18 @@ Nicole Harms
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a><span class="co"># Reading in data</span></span>
 <span id="cb1-2"><a></a>growth <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">plant =</span> <span class="fu">c</span>(<span class="st">"plant 1"</span>,<span class="st">"plant 2"</span>,<span class="st">"plant 3"</span>,<span class="st">"plant 4"</span>,<span class="st">"plant 5"</span>,<span class="st">"plant6"</span>),</span>
-<span id="cb1-3"><a></a>                     <span class="at">low =</span> <span class="fu">c</span>(<span class="fl">9.44</span>,<span class="fl">10.94</span>,<span class="fl">14.67</span>,<span class="fl">17.22</span>,<span class="fl">14.75</span>,<span class="fl">8.47</span>),</span>
-<span id="cb1-4"><a></a>                     <span class="at">medium =</span> <span class="fu">c</span>(<span class="fl">12.18</span>,<span class="fl">24.28</span>,<span class="fl">18.68</span>,<span class="fl">21.53</span>,<span class="fl">23.68</span>,<span class="fl">20.51</span>),</span>
-<span id="cb1-5"><a></a>                     <span class="at">high =</span> <span class="fu">c</span>(<span class="fl">28.05</span>,<span class="fl">23.42</span>,<span class="fl">24.58</span>,<span class="fl">27.25</span>,<span class="fl">20.50</span>,<span class="fl">24.57</span>))</span>
+<span id="cb1-3"><a></a>                     <span class="at">low =</span> <span class="fu">c</span>(<span class="fl">18.51</span>,<span class="fl">5.99</span>,<span class="fl">7.06</span>,<span class="fl">14.02</span>,<span class="fl">14.96</span>,<span class="fl">13.56</span>),</span>
+<span id="cb1-4"><a></a>                     <span class="at">medium =</span> <span class="fu">c</span>(<span class="fl">19.19</span>,<span class="fl">19.09</span>,<span class="fl">17.90</span>,<span class="fl">21.47</span>,<span class="fl">20.38</span>,<span class="fl">14.58</span>),</span>
+<span id="cb1-5"><a></a>                     <span class="at">high =</span> <span class="fu">c</span>(<span class="fl">19.23</span>,<span class="fl">24.27</span>,<span class="fl">27.34</span>,<span class="fl">22.23</span>,<span class="fl">22.92</span>,<span class="fl">28.77</span>))</span>
 <span id="cb1-6"><a></a>growth</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>    plant   low medium  high
-1 plant 1  9.44  12.18 28.05
-2 plant 2 10.94  24.28 23.42
-3 plant 3 14.67  18.68 24.58
-4 plant 4 17.22  21.53 27.25
-5 plant 5 14.75  23.68 20.50
-6  plant6  8.47  20.51 24.57</code></pre>
+1 plant 1 18.51  19.19 19.23
+2 plant 2  5.99  19.09 24.27
+3 plant 3  7.06  17.90 27.34
+4 plant 4 14.02  21.47 22.23
+5 plant 5 14.96  20.38 22.92
+6  plant6 13.56  14.58 28.77</code></pre>
 </div>
 </div>
 <div class="fragment">
@@ -490,12 +490,12 @@ Nicole Harms
 <pre><code># A tibble: 6 × 3
   plant   light_level growth
   &lt;chr&gt;   &lt;chr&gt;        &lt;dbl&gt;
-1 plant 1 low           9.44
-2 plant 1 medium       12.2 
-3 plant 1 high         28.0 
-4 plant 2 low          10.9 
-5 plant 2 medium       24.3 
-6 plant 2 high         23.4 </code></pre>
+1 plant 1 low          18.5 
+2 plant 1 medium       19.2 
+3 plant 1 high         19.2 
+4 plant 2 low           5.99
+5 plant 2 medium       19.1 
+6 plant 2 high         24.3 </code></pre>
 </div>
 </div>
 </section>
@@ -573,8 +573,8 @@ Nicole Harms
 
 Response: growth
             Df Sum Sq Mean Sq F value    Pr(&gt;F)    
-light_level  2 451.49 225.743  17.426 0.0001225 ***
-Residuals   15 194.31  12.954                      
+light_level  2 417.19  208.60  15.126 0.0002531 ***
+Residuals   15 206.86   13.79                      
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
@@ -610,12 +610,12 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <pre><code># A tibble: 6 × 4
   plant fertilizer light_level growth
   &lt;int&gt; &lt;chr&gt;      &lt;chr&gt;        &lt;dbl&gt;
-1     1 Y          low           9.44
-2     1 Y          medium       12.2 
-3     1 Y          high         28.0 
-4     2 N          low          10.9 
-5     2 N          medium       24.3 
-6     2 N          high         23.4 </code></pre>
+1     1 Y          low          18.5 
+2     1 Y          medium       19.2 
+3     1 Y          high         19.2 
+4     2 N          low           5.99
+5     2 N          medium       19.1 
+6     2 N          high         24.3 </code></pre>
 </div>
 </div>
 </section>
@@ -630,10 +630,10 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 
 Response: growth
                        Df Sum Sq Mean Sq F value    Pr(&gt;F)    
-light_level             2 451.49 225.743 15.9712 0.0004147 ***
-fertilizer              1   7.55   7.553  0.5344 0.4788032    
-light_level:fertilizer  2  17.15   8.573  0.6065 0.5611346    
-Residuals              12 169.61  14.134                      
+light_level             2 417.19 208.597 13.0163 0.0009866 ***
+fertilizer              1   0.68   0.684  0.0427 0.8397386    
+light_level:fertilizer  2  13.86   6.931  0.4325 0.6586154    
+Residuals              12 192.31  16.026                      
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
