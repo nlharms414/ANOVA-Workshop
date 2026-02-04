@@ -41,3 +41,13 @@ ggplot(data.frame(x = c(0,40)), aes(x = x)) +
         axis.text.y = element_blank(),
         axis.title.y = element_blank())
 
+set.seed(2000)
+growth <- data.frame(a = round(rnorm(6,12,3),2),
+                     b = round(rnorm(6,18,3),2),
+                     c = round(rnorm(6,24,3),2))
+growth
+
+growth <- data.frame(a = growth$a,
+                     b = growth$b,
+                     c = growth$c)
+growth

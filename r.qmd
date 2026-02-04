@@ -32,35 +32,70 @@ Examples:
 
 -   Determining if there is a difference in how 10 different medications affect blood pressure.
 
--   Analyzing the effects of three light levels, four moisture levels, and their interaction on a plant's growth.
+-   Analyzing the effects of three light levels, fertilizer or not, and their interaction on a plant's growth.
 
-## One-Way vs. Two-Way ANOVA {.center}
+## Example {.center}
 
--   If two *independent categorical variables* need to be analyzed, this is referred to as a *two-way* ANOVA
+Let's look at an example for how we would run an ANOVA in R. Say we have the following scenario:
 
-    -   This can be extended to more than two variables
-    
--   Two-way ANOVA analyzes:
+::: incremental
+-   We want to look at how three different light levels (low, medium, high) affect the growth of a plant (in centimeters).
 
-    -   Each independent variable
-    
-    -   How they interact (if applicable)
+-   In a greenhouse, six plants are grown under each light level (each in their own pot) for a total of 18 plants in the experiment.
 
-## When would I use ANOVA? {.center}
+-   All other conditions are constant across all plants, and after 12 weeks, total growth is measured
+:::
 
-Examples:
+## Example Data {.center}
 
--   Comparing three diets, based on how much weight a person lost.
+Say we have the following sample data.
 
--   Determining if there is a difference in how 10 different medications affect blood pressure.
+```{r}
+#| echo: true
+# Reading in data
+growth <- data.frame(plant = c("plant 1","plant 2","plant 3","plant 4","plant 5","plant6"),
+                     low = c(9.44,10.94,14.67,17.22,14.75,8.47),
+                     medium = c(12.18,24.28,18.68,21.53,23.68,20.51),
+                     high = c(28.05,23.42,24.58,27.25,20.50,24.57))
+growth
+```
 
--   **Analyzing the effects of three light levels, four moisture levels, and their interaction on a plant's growth.**
+. . .
 
-. . . 
+Note: This data is in **wide** format, but we'll need it in **long** format in order to analyze it.
 
-The first two examples would use a **one-way** ANOVA. The third example would use a **two-way** ANOVA.
+## Quick Tip! Reformatting Data {.center}
 
-## ANOVA Assumptions
+The `pivot_longer()` function from the `tidyr` package easily converts data from **wide** format to **long** format. 
+
+. . .
+
+Install the package (if you haven't already) by pasting the following code into your console.
+
+```{r}
+#| echo: true
+#| eval: false
+install.packages("tidyr")
+```
+
+## Quick Tip! Reformatting Data {.center}
+
+Next, use `pivot_longer()` to restructure the data.
+
+```{r}
+#| echo: true
+#| code-line-numbers: "|3|4|5|6|"
+# Putting data in long format
+library(tidyr)
+growth_long <- pivot_longer(data = growth,
+                            cols = "low":"high",
+                            names_to = "light_level",
+                            values_to = "growth")
+head(growth_long)
+```
+
+
+## ANOVA Assumptions {.center}
 
 To use ANOVA, certain assumptions must be met, or results will not be reliable.
 
@@ -99,8 +134,6 @@ ggplot(data.frame(x = c(0,40)), aes(x = x)) +
         axis.ticks.y = element_blank(),
         axis.text.y = element_blank(),
         axis.title.y = element_blank(),
-        axis.ticks.x = element_blank(),
-        axis.text.x = element_blank(),
         axis.title.x = element_blank(),
         axis.line.y = element_blank())
 ```
@@ -140,6 +173,45 @@ ggplot(data.frame(x = c(0,40)), aes(x = x)) +
 
 Here, groups are normally distributed with different means, but variances are unequal.
 
+## Checking for Normality {.center}
+
+In a general sense, we want to check that our data approximately follows the normal distribution.
+
+```{r}
+#| fig-align: center
+
+ggplot(data.frame(x = c(-20,60)), aes(x = x)) +
+  stat_function(fun = dnorm, args = list(mean = 20, sd = 12), color = "#0072B2", linewidth = 1.5) +
+  geom_vline(xintercept = 20, 
+             color = "#0072B2", 
+             linetype = "dashed") +
+  theme(axis.line = element_line(colour = "black"),
+        panel.grid.major = element_blank(),
+        panel.grid.minor = element_blank(),
+        panel.border = element_blank(),
+        panel.background = element_blank(),
+        axis.ticks.y = element_blank(),
+        axis.text.y = element_blank(),
+        axis.title.y = element_blank(),
+        axis.ticks.x = element_blank(),
+        axis.text.x = element_blank(),
+        axis.title.x = element_blank(),
+        axis.line.y = element_blank())
+```
+
+## Checking for Normality {.center}
+
+Let's see if our data looks normal by making a histogram.
+
+```{r}
+#| fig-align: center
+hist(growth_long$growth)
+```
+
+. . .
+
+Our data looks fairly normal, so we can proceed with an ANOVA. We will assume that the variances are approximately equal.
+
 ## How does ANOVA work? {.center}
 
 ANOVA breaks down total data set variance into two components:
@@ -154,7 +226,78 @@ ANOVA breaks down total data set variance into two components:
 
 If ***between-group variance*** is larger, this often suggests that the group means are different.
 
--   These variances are calculated using **sums of squares**
+## ANOVA Hypotheses {.center}
+
+An ANOVA tests the following hypotheses:
+
+::: incremental 
+-   $H_0:$All group means are equal.
+
+-   $H_A:$At least one group mean is different.
+:::
+
+. . . 
+
+We test these hypotheses with an F-test.
+
+-   If we get a p-value < 0.05, then we have evidence in favor of $H_A:$
+
+## ANOVA In R {.center}
+
+```{r}
+#| echo: true
+#| code-line-numbers: "|2|3|"
+# Run an ANOVA
+model <- lm(growth ~ light_level, data = growth_long)
+anova(model)
+```
+
+## One-Way vs. Two-Way ANOVA {.center}
+
+-   If two *independent categorical variables* need to be analyzed, this is referred to as a *two-way* ANOVA
+
+    -   This can be extended to more than two variables
+    
+-   Two-way ANOVA analyzes:
+
+    -   Each independent variable
+    
+    -   How they interact (if applicable)
+    
+## Two-Way Anova Example {.center}
+
+Consider our original example. 
+
+-   Say we have a second independent variable to analyze.
+
+-   Now we also want to see if the presence of fertilizer or not affects plant growth.
+
+-   We also want to see if it interacts with light level.
+
+## New Data Set {.center}
+
+```{r}
+growth2 <- data.frame(plant = c(1:6),
+                     fertilizer = rep(c("Y","N"),3),
+                     low = c(9.44,10.94,14.67,17.22,14.75,8.47),
+                     medium = c(12.18,24.28,18.68,21.53,23.68,20.51),
+                     high = c(28.05,23.42,24.58,27.25,20.50,24.57))
+growth_long2 <- pivot_longer(data = growth2,
+                            cols = "low":"high",
+                            names_to = "light_level",
+                            values_to = "growth")
+head(growth_long2)
+```
+
+## Two-Way ANOVA in R {.center}
+
+```{r}
+#| echo: true
+#| code-line-numbers: "|2|3|"
+# Run a two-way ANOVA
+model2 <- lm(growth ~ light_level*fertilizer, data = growth_long2)
+anova(model2)
+```
 
 ## Sums of Squares: Which to use? {.center}
 
@@ -162,12 +305,8 @@ If ***between-group variance*** is larger, this often suggests that the group me
 
 -   The type of sums of squares you use depends on your scenario
 
--   We will look at two types of sums of squares:
+-   The previous examples used Type I sums of squares
 
-    ::: incremental
-    -   Type I
-    
-    -   Type III
-    :::
+-   If you have **unbalanced** data, you'll want to use Type III sums of squares
 
 

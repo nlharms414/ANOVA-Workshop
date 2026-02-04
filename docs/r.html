@@ -30,6 +30,71 @@
       margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
       vertical-align: middle;
     }
+    /* CSS for syntax highlighting */
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      { color: #003b4f; background-color: #f1f3f5; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #003b4f; } /* Normal */
+    code span.al { color: #ad0000; } /* Alert */
+    code span.an { color: #5e5e5e; } /* Annotation */
+    code span.at { color: #657422; } /* Attribute */
+    code span.bn { color: #ad0000; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #003b4f; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #20794d; } /* Char */
+    code span.cn { color: #8f5902; } /* Constant */
+    code span.co { color: #5e5e5e; } /* Comment */
+    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+    code span.dt { color: #ad0000; } /* DataType */
+    code span.dv { color: #ad0000; } /* DecVal */
+    code span.er { color: #ad0000; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #ad0000; } /* Float */
+    code span.fu { color: #4758ab; } /* Function */
+    code span.im { color: #00769e; } /* Import */
+    code span.in { color: #5e5e5e; } /* Information */
+    code span.kw { color: #003b4f; font-weight: bold; } /* Keyword */
+    code span.op { color: #5e5e5e; } /* Operator */
+    code span.ot { color: #003b4f; } /* Other */
+    code span.pp { color: #ad0000; } /* Preprocessor */
+    code span.sc { color: #5e5e5e; } /* SpecialChar */
+    code span.ss { color: #20794d; } /* SpecialString */
+    code span.st { color: #20794d; } /* String */
+    code span.va { color: #111111; } /* Variable */
+    code span.vs { color: #20794d; } /* VerbatimString */
+    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
   <link rel="stylesheet" href="site_libs/revealjs/dist/theme/quarto.css">
   <link href="site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
@@ -362,8 +427,158 @@ Nicole Harms
 <ul>
 <li><p>Comparing three diets, based on how much weight a person lost.</p></li>
 <li><p>Determining if there is a difference in how 10 different medications affect blood pressure.</p></li>
-<li><p>Analyzing the effects of three light levels, four moisture levels, and their interaction on a plant’s growth.</p></li>
+<li><p>Analyzing the effects of three light levels, fertilizer or not, and their interaction on a plant’s growth.</p></li>
 </ul>
+</section>
+<section id="example" class="slide level2 center">
+<h2>Example</h2>
+<p>Let’s look at an example for how we would run an ANOVA in R. Say we have the following scenario:</p>
+<div>
+<ul>
+<li class="fragment"><p>We want to look at how three different light levels (low, medium, high) affect the growth of a plant (in centimeters).</p></li>
+<li class="fragment"><p>In a greenhouse, six plants are grown under each light level (each in their own pot) for a total of 18 plants in the experiment.</p></li>
+<li class="fragment"><p>All other conditions are constant across all plants, and after 12 weeks, total growth is measured</p></li>
+</ul>
+</div>
+</section>
+<section id="example-data" class="slide level2 center">
+<h2>Example Data</h2>
+<p>Say we have the following sample data.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a><span class="co"># Reading in data</span></span>
+<span id="cb1-2"><a></a>growth <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">plant =</span> <span class="fu">c</span>(<span class="st">"plant 1"</span>,<span class="st">"plant 2"</span>,<span class="st">"plant 3"</span>,<span class="st">"plant 4"</span>,<span class="st">"plant 5"</span>,<span class="st">"plant6"</span>),</span>
+<span id="cb1-3"><a></a>                     <span class="at">low =</span> <span class="fu">c</span>(<span class="fl">9.44</span>,<span class="fl">10.94</span>,<span class="fl">14.67</span>,<span class="fl">17.22</span>,<span class="fl">14.75</span>,<span class="fl">8.47</span>),</span>
+<span id="cb1-4"><a></a>                     <span class="at">medium =</span> <span class="fu">c</span>(<span class="fl">12.18</span>,<span class="fl">24.28</span>,<span class="fl">18.68</span>,<span class="fl">21.53</span>,<span class="fl">23.68</span>,<span class="fl">20.51</span>),</span>
+<span id="cb1-5"><a></a>                     <span class="at">high =</span> <span class="fu">c</span>(<span class="fl">28.05</span>,<span class="fl">23.42</span>,<span class="fl">24.58</span>,<span class="fl">27.25</span>,<span class="fl">20.50</span>,<span class="fl">24.57</span>))</span>
+<span id="cb1-6"><a></a>growth</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>    plant   low medium  high
+1 plant 1  9.44  12.18 28.05
+2 plant 2 10.94  24.28 23.42
+3 plant 3 14.67  18.68 24.58
+4 plant 4 17.22  21.53 27.25
+5 plant 5 14.75  23.68 20.50
+6  plant6  8.47  20.51 24.57</code></pre>
+</div>
+</div>
+<div class="fragment">
+<p>Note: This data is in <strong>wide</strong> format, but we’ll need it in <strong>long</strong> format in order to analyze it.</p>
+</div>
+</section>
+<section id="quick-tip-reformatting-data" class="slide level2 center">
+<h2>Quick Tip! Reformatting Data</h2>
+<p>The <code>pivot_longer()</code> function from the <code>tidyr</code> package easily converts data from <strong>wide</strong> format to <strong>long</strong> format.</p>
+<div class="fragment">
+<p>Install the package (if you haven’t already) by pasting the following code into your console.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a></a><span class="fu">install.packages</span>(<span class="st">"tidyr"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</div>
+</section>
+<section id="quick-tip-reformatting-data-1" class="slide level2 center">
+<h2>Quick Tip! Reformatting Data</h2>
+<p>Next, use <code>pivot_longer()</code> to restructure the data.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4" data-code-line-numbers="|3|4|5|6|"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a></a><span class="co"># Putting data in long format</span></span>
+<span id="cb4-2"><a></a><span class="fu">library</span>(tidyr)</span>
+<span id="cb4-3"><a></a>growth_long <span class="ot">&lt;-</span> <span class="fu">pivot_longer</span>(<span class="at">data =</span> growth,</span>
+<span id="cb4-4"><a></a>                            <span class="at">cols =</span> <span class="st">"low"</span><span class="sc">:</span><span class="st">"high"</span>,</span>
+<span id="cb4-5"><a></a>                            <span class="at">names_to =</span> <span class="st">"light_level"</span>,</span>
+<span id="cb4-6"><a></a>                            <span class="at">values_to =</span> <span class="st">"growth"</span>)</span>
+<span id="cb4-7"><a></a><span class="fu">head</span>(growth_long)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 3
+  plant   light_level growth
+  &lt;chr&gt;   &lt;chr&gt;        &lt;dbl&gt;
+1 plant 1 low           9.44
+2 plant 1 medium       12.2 
+3 plant 1 high         28.0 
+4 plant 2 low          10.9 
+5 plant 2 medium       24.3 
+6 plant 2 high         23.4 </code></pre>
+</div>
+</div>
+</section>
+<section id="anova-assumptions" class="slide level2 center">
+<h2>ANOVA Assumptions</h2>
+<p>To use ANOVA, certain assumptions must be met, or results will not be reliable.</p>
+<div>
+<ul>
+<li class="fragment"><p>Data is normally distributed</p></li>
+<li class="fragment"><p>Observations are independent of each other</p></li>
+<li class="fragment"><p>Variances for each group are approximately equal</p></li>
+</ul>
+</div>
+</section>
+<section id="anova-assumptions-1" class="slide level2">
+<h2>ANOVA Assumptions</h2>
+
+<img data-src="r_files/figure-revealjs/unnamed-chunk-4-1.png" class="quarto-figure quarto-figure-center r-stretch" width="960"><p>Here, each group is normally distributed with different means and equal variance.</p>
+</section>
+<section id="anova-assumptions-2" class="slide level2">
+<h2>ANOVA Assumptions</h2>
+
+<img data-src="r_files/figure-revealjs/unnamed-chunk-5-1.png" class="quarto-figure quarto-figure-center r-stretch" width="960"><p>Here, groups are normally distributed with different means, but variances are unequal.</p>
+</section>
+<section id="checking-for-normality" class="slide level2 center">
+<h2>Checking for Normality</h2>
+<p>In a general sense, we want to check that our data approximately follows the normal distribution.</p>
+
+<img data-src="r_files/figure-revealjs/unnamed-chunk-6-1.png" class="quarto-figure quarto-figure-center r-stretch" width="960"></section>
+<section id="checking-for-normality-1" class="slide level2 center">
+<h2>Checking for Normality</h2>
+<p>Let’s see if our data looks normal by making a histogram.</p>
+
+<img data-src="r_files/figure-revealjs/unnamed-chunk-7-1.png" class="quarto-figure quarto-figure-center r-stretch" width="960"><div class="fragment">
+<p>Our data looks fairly normal, so we can proceed with an ANOVA. We will assume that the variances are approximately equal.</p>
+</div>
+</section>
+<section id="how-does-anova-work" class="slide level2 center">
+<h2>How does ANOVA work?</h2>
+<p>ANOVA breaks down total data set variance into two components:</p>
+<div>
+<ul>
+<li class="fragment"><p><strong><em>Within</em>-group variance:</strong> How much do individual units within a group vary from each other?</p></li>
+<li class="fragment"><p><strong><em>Between</em>-group variance:</strong> How much do the different groups vary from each other?</p></li>
+</ul>
+</div>
+<div class="fragment">
+<p>If <strong><em>between-group variance</em></strong> is larger, this often suggests that the group means are different.</p>
+</div>
+</section>
+<section id="anova-hypotheses" class="slide level2 center">
+<h2>ANOVA Hypotheses</h2>
+<p>An ANOVA tests the following hypotheses:</p>
+<div>
+<ul>
+<li class="fragment"><p><span class="math inline">\(H_0:\)</span>All group means are equal.</p></li>
+<li class="fragment"><p><span class="math inline">\(H_A:\)</span>At least one group mean is different.</p></li>
+</ul>
+</div>
+<div class="fragment">
+<p>We test these hypotheses with an F-test.</p>
+<ul>
+<li>If we get a p-value &lt; 0.05, then we have evidence in favor of <span class="math inline">\(H_A:\)</span></li>
+</ul>
+</div>
+</section>
+<section id="anova-in-r" class="slide level2 center">
+<h2>ANOVA In R</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6" data-code-line-numbers="|2|3|"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a></a><span class="co"># Run an ANOVA</span></span>
+<span id="cb6-2"><a></a>model <span class="ot">&lt;-</span> <span class="fu">lm</span>(growth <span class="sc">~</span> light_level, <span class="at">data =</span> growth_long)</span>
+<span id="cb6-3"><a></a><span class="fu">anova</span>(model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Analysis of Variance Table
+
+Response: growth
+            Df Sum Sq Mean Sq F value    Pr(&gt;F)    
+light_level  2 451.49 225.743  17.426 0.0001225 ***
+Residuals   15 194.31  12.954                      
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
+</div>
+</div>
 </section>
 <section id="one-way-vs.-two-way-anova" class="slide level2 center">
 <h2>One-Way vs.&nbsp;Two-Way ANOVA</h2>
@@ -379,53 +594,49 @@ Nicole Harms
 </ul></li>
 </ul>
 </section>
-<section id="when-would-i-use-anova-2" class="slide level2 center">
-<h2>When would I use ANOVA?</h2>
-<p>Examples:</p>
+<section id="two-way-anova-example" class="slide level2 center">
+<h2>Two-Way Anova Example</h2>
+<p>Consider our original example.</p>
 <ul>
-<li><p>Comparing three diets, based on how much weight a person lost.</p></li>
-<li><p>Determining if there is a difference in how 10 different medications affect blood pressure.</p></li>
-<li><p><strong>Analyzing the effects of three light levels, four moisture levels, and their interaction on a plant’s growth.</strong></p></li>
+<li><p>Say we have a second independent variable to analyze.</p></li>
+<li><p>Now we also want to see if the presence of fertilizer or not affects plant growth.</p></li>
+<li><p>We also want to see if it interacts with light level.</p></li>
 </ul>
-<div class="fragment">
-<p>The first two examples would use a <strong>one-way</strong> ANOVA. The third example would use a <strong>two-way</strong> ANOVA.</p>
+</section>
+<section id="new-data-set" class="slide level2 center">
+<h2>New Data Set</h2>
+<div class="cell">
+<div class="cell-output cell-output-stdout">
+<pre><code># A tibble: 6 × 4
+  plant fertilizer light_level growth
+  &lt;int&gt; &lt;chr&gt;      &lt;chr&gt;        &lt;dbl&gt;
+1     1 Y          low           9.44
+2     1 Y          medium       12.2 
+3     1 Y          high         28.0 
+4     2 N          low          10.9 
+5     2 N          medium       24.3 
+6     2 N          high         23.4 </code></pre>
+</div>
 </div>
 </section>
-<section id="anova-assumptions" class="slide level2">
-<h2>ANOVA Assumptions</h2>
-<p>To use ANOVA, certain assumptions must be met, or results will not be reliable.</p>
-<div>
-<ul>
-<li class="fragment"><p>Data is normally distributed</p></li>
-<li class="fragment"><p>Observations are independent of each other</p></li>
-<li class="fragment"><p>Variances for each group are approximately equal</p></li>
-</ul>
-</div>
-</section>
-<section id="anova-assumptions-1" class="slide level2">
-<h2>ANOVA Assumptions</h2>
+<section id="two-way-anova-in-r" class="slide level2 center">
+<h2>Two-Way ANOVA in R</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9" data-code-line-numbers="|2|3|"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a></a><span class="co"># Run a two-way ANOVA</span></span>
+<span id="cb9-2"><a></a>model2 <span class="ot">&lt;-</span> <span class="fu">lm</span>(growth <span class="sc">~</span> light_level<span class="sc">*</span>fertilizer, <span class="at">data =</span> growth_long2)</span>
+<span id="cb9-3"><a></a><span class="fu">anova</span>(model2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>Analysis of Variance Table
 
-<img data-src="r_files/figure-revealjs/unnamed-chunk-1-1.png" class="quarto-figure quarto-figure-center r-stretch" width="960"><p>Here, each group is normally distributed with different means and equal variance.</p>
-</section>
-<section id="anova-assumptions-2" class="slide level2">
-<h2>ANOVA Assumptions</h2>
-
-<img data-src="r_files/figure-revealjs/unnamed-chunk-2-1.png" class="quarto-figure quarto-figure-center r-stretch" width="960"><p>Here, groups are normally distributed with different means, but variances are unequal.</p>
-</section>
-<section id="how-does-anova-work" class="slide level2 center">
-<h2>How does ANOVA work?</h2>
-<p>ANOVA breaks down total data set variance into two components:</p>
-<div>
-<ul>
-<li class="fragment"><p><strong><em>Within</em>-group variance:</strong> How much do individual units within a group vary from each other?</p></li>
-<li class="fragment"><p><strong><em>Between</em>-group variance:</strong> How much do the different groups vary from each other?</p></li>
-</ul>
+Response: growth
+                       Df Sum Sq Mean Sq F value    Pr(&gt;F)    
+light_level             2 451.49 225.743 15.9712 0.0004147 ***
+fertilizer              1   7.55   7.553  0.5344 0.4788032    
+light_level:fertilizer  2  17.15   8.573  0.6065 0.5611346    
+Residuals              12 169.61  14.134                      
+---
+Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
-<div class="fragment">
-<p>If <strong><em>between-group variance</em></strong> is larger, this often suggests that the group means are different.</p>
-<ul>
-<li>These variances are calculated using <strong>sums of squares</strong></li>
-</ul>
 </div>
 </section>
 <section id="sums-of-squares-which-to-use" class="slide level2 center">
@@ -433,13 +644,8 @@ Nicole Harms
 <ul>
 <li><p>Multiple sums of squares methods exist</p></li>
 <li><p>The type of sums of squares you use depends on your scenario</p></li>
-<li><p>We will look at two types of sums of squares:</p>
-<div>
-<ul>
-<li class="fragment"><p>Type I</p></li>
-<li class="fragment"><p>Type III</p></li>
-</ul>
-</div></li>
+<li><p>The previous examples used Type I sums of squares</p></li>
+<li><p>If you have <strong>unbalanced</strong> data, you’ll want to use Type III sums of squares</p></li>
 </ul>
 
 <div class="quarto-auto-generated-content">

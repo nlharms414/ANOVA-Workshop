@@ -60,7 +60,7 @@
     "href": "r.html#when-would-i-use-anova-1",
     "title": "Analysis of Variance in R",
     "section": "When would I use ANOVA?",
-    "text": "When would I use ANOVA?\nExamples:\n\nComparing three diets, based on how much weight a person lost.\nDetermining if there is a difference in how 10 different medications affect blood pressure.\nAnalyzing the effects of three light levels, four moisture levels, and their interaction on a plant’s growth."
+    "text": "When would I use ANOVA?\nExamples:\n\nComparing three diets, based on how much weight a person lost.\nDetermining if there is a difference in how 10 different medications affect blood pressure.\nAnalyzing the effects of three light levels, fertilizer or not, and their interaction on a plant’s growth."
   },
   {
     "objectID": "r.html#anova-assumptions-1",
@@ -81,7 +81,7 @@
     "href": "r.html#how-does-anova-work",
     "title": "Analysis of Variance in R",
     "section": "How does ANOVA work?",
-    "text": "How does ANOVA work?\nANOVA breaks down total data set variance into two components:\n\n\nWithin-group variance: How much do individual units within a group vary from each other?\nBetween-group variance: How much do the different groups vary from each other?\n\n\n\nIf between-group variance is larger, this often suggests that the group means are different.\n\nThese variances are calculated using sums of squares"
+    "text": "How does ANOVA work?\nANOVA breaks down total data set variance into two components:\n\n\nWithin-group variance: How much do individual units within a group vary from each other?\nBetween-group variance: How much do the different groups vary from each other?\n\n\n\nIf between-group variance is larger, this often suggests that the group means are different."
   },
   {
     "objectID": "r.html#example-anova-table",
@@ -123,7 +123,7 @@
     "href": "r.html#sums-of-squares-which-to-use",
     "title": "Analysis of Variance in R",
     "section": "Sums of Squares: Which to use?",
-    "text": "Sums of Squares: Which to use?\n\nMultiple sums of squares methods exist\nThe type of sums of squares you use depends on your scenario\nWe will look at two types of sums of squares:\n\n\nType I\nType III"
+    "text": "Sums of Squares: Which to use?\n\nMultiple sums of squares methods exist\nThe type of sums of squares you use depends on your scenario\nThe previous examples used Type I sums of squares\nIf you have unbalanced data, you’ll want to use Type III sums of squares"
   },
   {
     "objectID": "r.html#skeleton-one-way-anova-table",
@@ -138,5 +138,89 @@
     "title": "Analysis of Variance in R",
     "section": "“Skeleton” Two-Way ANOVA Table",
     "text": "“Skeleton” Two-Way ANOVA Table"
+  },
+  {
+    "objectID": "r.html#anova-in-r",
+    "href": "r.html#anova-in-r",
+    "title": "Analysis of Variance in R",
+    "section": "ANOVA In R",
+    "text": "ANOVA In R\n\n# Run an ANOVA\nmodel &lt;- lm(growth ~ light_level, data = growth_long)\nanova(model)\n\nAnalysis of Variance Table\n\nResponse: growth\n            Df Sum Sq Mean Sq F value    Pr(&gt;F)    \nlight_level  2 451.49 225.743  17.426 0.0001225 ***\nResiduals   15 194.31  12.954                      \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1"
+  },
+  {
+    "objectID": "r.html#example",
+    "href": "r.html#example",
+    "title": "Analysis of Variance in R",
+    "section": "Example",
+    "text": "Example\nLet’s look at an example for how we would run an ANOVA in R. Say we have the following scenario:\n\n\nWe want to look at how three different light levels (low, medium, high) affect the growth of a plant (in centimeters).\nIn a greenhouse, six plants are grown under each light level (each in their own pot) for a total of 18 plants in the experiment.\nAll other conditions are constant across all plants, and after 12 weeks, total growth is measured"
+  },
+  {
+    "objectID": "r.html#example-data",
+    "href": "r.html#example-data",
+    "title": "Analysis of Variance in R",
+    "section": "Example Data",
+    "text": "Example Data\nSay we have the following sample data.\n\n# Reading in data\ngrowth &lt;- data.frame(plant = c(\"plant 1\",\"plant 2\",\"plant 3\",\"plant 4\",\"plant 5\",\"plant6\"),\n                     low = c(9.44,10.94,14.67,17.22,14.75,8.47),\n                     medium = c(12.18,24.28,18.68,21.53,23.68,20.51),\n                     high = c(28.05,23.42,24.58,27.25,20.50,24.57))\ngrowth\n\n    plant   low medium  high\n1 plant 1  9.44  12.18 28.05\n2 plant 2 10.94  24.28 23.42\n3 plant 3 14.67  18.68 24.58\n4 plant 4 17.22  21.53 27.25\n5 plant 5 14.75  23.68 20.50\n6  plant6  8.47  20.51 24.57\n\n\n\nNote: This data is in wide format, but we’ll need it in long format in order to analyze it."
+  },
+  {
+    "objectID": "r.html#hypotheses",
+    "href": "r.html#hypotheses",
+    "title": "Analysis of Variance in R",
+    "section": "Hypotheses",
+    "text": "Hypotheses\nWhen running an ANOVA, we are testing the following hypotheses for the groups of a given independent variable:\n\n\\(H_0:\\) All of the group means are equal.\n\\(H_A:\\) At least one of the group means is statistically different."
+  },
+  {
+    "objectID": "r.html#quick-tip-reformatting-data",
+    "href": "r.html#quick-tip-reformatting-data",
+    "title": "Analysis of Variance in R",
+    "section": "Quick Tip! Reformatting Data",
+    "text": "Quick Tip! Reformatting Data\nThe pivot_longer() function from the tidyr package easily converts data from wide format to long format.\n\nInstall the package (if you haven’t already) by pasting the following code into your console.\n\ninstall.packages(\"tidyr\")"
+  },
+  {
+    "objectID": "r.html#quick-tip-reformatting-data-1",
+    "href": "r.html#quick-tip-reformatting-data-1",
+    "title": "Analysis of Variance in R",
+    "section": "Quick Tip! Reformatting Data",
+    "text": "Quick Tip! Reformatting Data\nNext, use pivot_longer() to restructure the data.\n\n# Putting data in long format\nlibrary(tidyr)\ngrowth_long &lt;- pivot_longer(data = growth,\n                            cols = \"low\":\"high\",\n                            names_to = \"light_level\",\n                            values_to = \"growth\")\nhead(growth_long)\n\n# A tibble: 6 × 3\n  plant   light_level growth\n  &lt;chr&gt;   &lt;chr&gt;        &lt;dbl&gt;\n1 plant 1 low           9.44\n2 plant 1 medium       12.2 \n3 plant 1 high         28.0 \n4 plant 2 low          10.9 \n5 plant 2 medium       24.3 \n6 plant 2 high         23.4"
+  },
+  {
+    "objectID": "r.html#checking-for-normality",
+    "href": "r.html#checking-for-normality",
+    "title": "Analysis of Variance in R",
+    "section": "Checking for Normality",
+    "text": "Checking for Normality\nIn a general sense, we want to check that our data approximately follows the normal distribution."
+  },
+  {
+    "objectID": "r.html#checking-for-normality-1",
+    "href": "r.html#checking-for-normality-1",
+    "title": "Analysis of Variance in R",
+    "section": "Checking for Normality",
+    "text": "Checking for Normality\nLet’s see if our data looks normal by making a histogram.\n\n\nOur data looks fairly normal, so we can proceed with an ANOVA. We will assume that the variances are approximately equal."
+  },
+  {
+    "objectID": "r.html#anova-hypotheses",
+    "href": "r.html#anova-hypotheses",
+    "title": "Analysis of Variance in R",
+    "section": "ANOVA Hypotheses",
+    "text": "ANOVA Hypotheses\nAn ANOVA tests the following hypotheses:\n\n\n\\(H_0:\\)All group means are equal.\n\\(H_A:\\)At least one group mean is different.\n\n\n\nWe test these hypotheses with an F-test.\n\nIf we get a p-value &lt; 0.05, then we have evidence in favor of \\(H_A:\\)"
+  },
+  {
+    "objectID": "r.html#two-way-anova-example",
+    "href": "r.html#two-way-anova-example",
+    "title": "Analysis of Variance in R",
+    "section": "Two-Way Anova Example",
+    "text": "Two-Way Anova Example\nConsider our original example.\n\nSay we have a second independent variable to analyze.\nNow we also want to see if the presence of fertilizer or not affects plant growth.\nWe also want to see if it interacts with light level."
+  },
+  {
+    "objectID": "r.html#new-data-set",
+    "href": "r.html#new-data-set",
+    "title": "Analysis of Variance in R",
+    "section": "New Data Set",
+    "text": "New Data Set\n\n\n# A tibble: 6 × 4\n  plant fertilizer light_level growth\n  &lt;int&gt; &lt;chr&gt;      &lt;chr&gt;        &lt;dbl&gt;\n1     1 Y          low           9.44\n2     1 Y          medium       12.2 \n3     1 Y          high         28.0 \n4     2 N          low          10.9 \n5     2 N          medium       24.3 \n6     2 N          high         23.4"
+  },
+  {
+    "objectID": "r.html#two-way-anova-in-r",
+    "href": "r.html#two-way-anova-in-r",
+    "title": "Analysis of Variance in R",
+    "section": "Two-Way ANOVA in R",
+    "text": "Two-Way ANOVA in R\n\n# Run a two-way ANOVA\nmodel2 &lt;- lm(growth ~ light_level*fertilizer, data = growth_long2)\nanova(model2)\n\nAnalysis of Variance Table\n\nResponse: growth\n                       Df Sum Sq Mean Sq F value    Pr(&gt;F)    \nlight_level             2 451.49 225.743 15.9712 0.0004147 ***\nfertilizer              1   7.55   7.553  0.5344 0.4788032    \nlight_level:fertilizer  2  17.15   8.573  0.6065 0.5611346    \nResiduals              12 169.61  14.134                      \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1"
   }
 ]
