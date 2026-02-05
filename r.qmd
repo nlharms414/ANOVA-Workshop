@@ -10,8 +10,6 @@ format:
     logo: logo.jpg
 ---
 
-# Intro. to Analysis of Variance
-
 ## What is Analysis of Variance? {.center}
 
 Analysis of Variance (ANOVA) compares the means of some ***dependent variable*** across ***three or more groups*** of an ***independent variable*** to determine if the group means are statistically different.
@@ -34,14 +32,16 @@ Examples:
 
 -   Analyzing the effects of three light levels, fertilizer or not, and their interaction on a plant's growth.
 
-## Example {.center}
+## Example {.center style="font-size: 36px"}
 
 Let's look at an example for how we would run an ANOVA in R. Say we have the following scenario:
 
 ::: incremental
 -   We want to look at how three different light levels (low, medium, high) affect the growth of a plant (in centimeters).
 
--   In a greenhouse, six plants are grown under each light level (each in their own pot) for a total of 18 plants in the experiment.
+-   In a greenhouse, there are 18 grow lights; six with each light level
+
+-   18 separate plants are randomly assigned to each grow light
 
 -   All other conditions are constant across all plants, and after 12 weeks, total growth is measured
 :::
@@ -54,7 +54,7 @@ Say we have the following sample data.
 #| echo: true
 # Reading in data
 growth <- data.frame(plant = c("plant 1","plant 2","plant 3","plant 4","plant 5","plant 6"),
-                     low = c(18.51,5.99,14.02,7.06,14.96,13.56),
+                     low = c(18.51,5.99,11.02,7.06,14.96,13.56),
                      med = c(19.19,19.09,17.90,21.47,20.38,14.58),
                      high = c(19.23,24.27,27.34,22.23,22.92,28.77))
 growth
@@ -286,7 +286,7 @@ TukeyHSD(model, conf.level = 0.95) # default to 95% confidence
 
 -   `diff` gives the difference in means for the two groups
 -   `p adj` gives the p-value for the difference in two groups
--   Here, we see that the low & high and low & medium groups are statiscially different, but not medium & high
+-   Here, we see that the low & high and low & medium groups are statiscially different, but not medium & high 
 
 ## One-Way vs. Two-Way ANOVA {.center}
 
@@ -316,7 +316,7 @@ Consider our original example.
 #| echo: true
 growth2 <- data.frame(plant = c(1:6),
                      fertilizer = rep(c("Y","N"),each=3),
-                     low = c(18.51,5.99,14.02,7.06,14.96,13.56),
+                     low = c(18.51,5.99,12.02,7.06,14.96,13.56),
                      med = c(19.19,19.09,17.90,21.47,20.38,14.58),
                      high = c(19.23,24.27,27.34,22.23,22.92,28.77))
 growth_long2 <- pivot_longer(data = growth2,
@@ -343,6 +343,8 @@ summary(model2)
 ## Caution in the face of interaction! {.center}
 
 -   If interaction is determined statistically significant via an ANOVA, then generally we cannot make any assumptions about the individual effects
+
+    -   Even if your individual effects show as significant, heed those results with caution if the interaction is significant
 
 -   A useful tool is an **interaction plot**
 
@@ -412,19 +414,32 @@ interaction.plot(x.factor = growth_long2$fertilizer,
                  col = c("#E69F00","#0072B2","#CC79A7"), lty = 1)
 ```
 
-This interaction plot shows little to no interaction between fertilizer and light level, which was confimed by the ANOVA.
+This interaction plot shows little to no interaction between fertilizer and light level, which was confirmed by the ANOVA.
 
 ## Tukey's HSD Test for Two-Way ANOVA {.center}
 
-Here, I've only printed the `TukeyHSD()` output for the light level and fertilizer interaction. 
+Tukey's HSD test can also be used with a two-way ANOVA.
 
 ```{r}
-TukeyHSD(model2, conf.level = 0.95)$`light_level:fertilizer`
+#| echo: true
+#| eval: false
+# Tukey's HSD test for a two-way ANOVA
+TukeyHSD(model2, conf.level = 0.95)
 ```
 
-## Final Thoughts {.center}
+I didn't include the output here, because it is long!
+
+-   Tukey's HSD test can give great further insight, especially when your interaction is significant
+
+## Other ANOVA Notes... {.center style="font-size: 32px"}
 
 -   If you ever encounter a scenario where `residual` degrees of freedom (`df`) are equal to or smaller than any main effect or interaction, ANOVA results won't be reliable
 
--   If you are ever worried that variances between groups 
+-   If you are ever worried that variances between groups aren't equal, the `leveneTest()` function can test for equality of variances
+
+-   If you have a scenario where you have an **unbalanced** experiment or missing data points, **Type III sums of squares** should be used in the ANOVA.
+
+    -   The `aov()` function we used uses **Type I sums of squares**.
+    
+    -   The library `cars` has an `Anova()` function with Type III capabilities.
 

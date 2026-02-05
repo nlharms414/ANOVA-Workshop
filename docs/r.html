@@ -404,11 +404,6 @@ Nicole Harms
 
   <p class="date">February 9, 2026</p>
 </section>
-<section>
-<section id="intro.-to-analysis-of-variance" class="title-slide slide level1 center">
-<h1>Intro. to Analysis of Variance</h1>
-
-</section>
 <section id="what-is-analysis-of-variance" class="slide level2 center">
 <h2>What is Analysis of Variance?</h2>
 <p>Analysis of Variance (ANOVA) compares the means of some <strong><em>dependent variable</em></strong> across <strong><em>three or more groups</em></strong> of an <strong><em>independent variable</em></strong> to determine if the group means are statistically different.</p>
@@ -430,13 +425,14 @@ Nicole Harms
 <li><p>Analyzing the effects of three light levels, fertilizer or not, and their interaction on a plant’s growth.</p></li>
 </ul>
 </section>
-<section id="example" class="slide level2 center">
+<section id="example" class="slide level2 center" style="font-size: 36px">
 <h2>Example</h2>
 <p>Let’s look at an example for how we would run an ANOVA in R. Say we have the following scenario:</p>
 <div>
 <ul>
 <li class="fragment"><p>We want to look at how three different light levels (low, medium, high) affect the growth of a plant (in centimeters).</p></li>
-<li class="fragment"><p>In a greenhouse, six plants are grown under each light level (each in their own pot) for a total of 18 plants in the experiment.</p></li>
+<li class="fragment"><p>In a greenhouse, there are 18 grow lights; six with each light level</p></li>
+<li class="fragment"><p>18 separate plants are randomly assigned to each grow light</p></li>
 <li class="fragment"><p>All other conditions are constant across all plants, and after 12 weeks, total growth is measured</p></li>
 </ul>
 </div>
@@ -447,7 +443,7 @@ Nicole Harms
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a><span class="co"># Reading in data</span></span>
 <span id="cb1-2"><a></a>growth <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">plant =</span> <span class="fu">c</span>(<span class="st">"plant 1"</span>,<span class="st">"plant 2"</span>,<span class="st">"plant 3"</span>,<span class="st">"plant 4"</span>,<span class="st">"plant 5"</span>,<span class="st">"plant 6"</span>),</span>
-<span id="cb1-3"><a></a>                     <span class="at">low =</span> <span class="fu">c</span>(<span class="fl">18.51</span>,<span class="fl">5.99</span>,<span class="fl">14.02</span>,<span class="fl">7.06</span>,<span class="fl">14.96</span>,<span class="fl">13.56</span>),</span>
+<span id="cb1-3"><a></a>                     <span class="at">low =</span> <span class="fu">c</span>(<span class="fl">18.51</span>,<span class="fl">5.99</span>,<span class="fl">11.02</span>,<span class="fl">7.06</span>,<span class="fl">14.96</span>,<span class="fl">13.56</span>),</span>
 <span id="cb1-4"><a></a>                     <span class="at">med =</span> <span class="fu">c</span>(<span class="fl">19.19</span>,<span class="fl">19.09</span>,<span class="fl">17.90</span>,<span class="fl">21.47</span>,<span class="fl">20.38</span>,<span class="fl">14.58</span>),</span>
 <span id="cb1-5"><a></a>                     <span class="at">high =</span> <span class="fu">c</span>(<span class="fl">19.23</span>,<span class="fl">24.27</span>,<span class="fl">27.34</span>,<span class="fl">22.23</span>,<span class="fl">22.92</span>,<span class="fl">28.77</span>))</span>
 <span id="cb1-6"><a></a>growth</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -455,7 +451,7 @@ Nicole Harms
 <pre><code>    plant   low   med  high
 1 plant 1 18.51 19.19 19.23
 2 plant 2  5.99 19.09 24.27
-3 plant 3 14.02 17.90 27.34
+3 plant 3 11.02 17.90 27.34
 4 plant 4  7.06 21.47 22.23
 5 plant 5 14.96 20.38 22.92
 6 plant 6 13.56 14.58 28.77</code></pre>
@@ -573,8 +569,8 @@ Nicole Harms
 <span id="cb7-3"><a></a><span class="fu">summary</span>(model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>            Df Sum Sq Mean Sq F value   Pr(&gt;F)    
-light_level  2  417.2  208.60   15.13 0.000253 ***
-Residuals   15  206.9   13.79                     
+light_level  2  454.6  227.29   16.68 0.000154 ***
+Residuals   15  204.3   13.62                     
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
@@ -588,8 +584,8 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 
 Response: growth
             Df Sum Sq Mean Sq F value    Pr(&gt;F)    
-light_level  2 417.19  208.60  15.126 0.0002531 ***
-Residuals   15 206.86   13.79                      
+light_level  2 454.58 227.292  16.685 0.0001536 ***
+Residuals   15 204.34  13.622                      
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
@@ -619,10 +615,10 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 Fit: aov(formula = growth ~ light_level, data = growth_long)
 
 $light_level
-               diff         lwr        upr     p adj
-low-high -11.776667 -17.3456764 -6.2076569 0.0001726
-med-high  -5.358333 -10.9273431  0.2106764 0.0601294
-med-low    6.418333   0.8493236 11.9873431 0.0232804</code></pre>
+               diff        lwr        upr     p adj
+low-high -12.276667 -17.811651 -6.7416828 0.0001052
+med-high  -5.358333 -10.893317  0.1766505 0.0584295
+med-low    6.918333   1.383349 12.4533172 0.0141169</code></pre>
 </div>
 </div>
 <ul>
@@ -659,7 +655,7 @@ med-low    6.418333   0.8493236 11.9873431 0.0232804</code></pre>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a></a>growth2 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">plant =</span> <span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>),</span>
 <span id="cb12-2"><a></a>                     <span class="at">fertilizer =</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"Y"</span>,<span class="st">"N"</span>),<span class="at">each=</span><span class="dv">3</span>),</span>
-<span id="cb12-3"><a></a>                     <span class="at">low =</span> <span class="fu">c</span>(<span class="fl">18.51</span>,<span class="fl">5.99</span>,<span class="fl">14.02</span>,<span class="fl">7.06</span>,<span class="fl">14.96</span>,<span class="fl">13.56</span>),</span>
+<span id="cb12-3"><a></a>                     <span class="at">low =</span> <span class="fu">c</span>(<span class="fl">18.51</span>,<span class="fl">5.99</span>,<span class="fl">12.02</span>,<span class="fl">7.06</span>,<span class="fl">14.96</span>,<span class="fl">13.56</span>),</span>
 <span id="cb12-4"><a></a>                     <span class="at">med =</span> <span class="fu">c</span>(<span class="fl">19.19</span>,<span class="fl">19.09</span>,<span class="fl">17.90</span>,<span class="fl">21.47</span>,<span class="fl">20.38</span>,<span class="fl">14.58</span>),</span>
 <span id="cb12-5"><a></a>                     <span class="at">high =</span> <span class="fu">c</span>(<span class="fl">19.23</span>,<span class="fl">24.27</span>,<span class="fl">27.34</span>,<span class="fl">22.23</span>,<span class="fl">22.92</span>,<span class="fl">28.77</span>))</span>
 <span id="cb12-6"><a></a>growth_long2 <span class="ot">&lt;-</span> <span class="fu">pivot_longer</span>(<span class="at">data =</span> growth2,</span>
@@ -687,11 +683,11 @@ med-low    6.418333   0.8493236 11.9873431 0.0232804</code></pre>
 <span id="cb14-2"><a></a>model2 <span class="ot">&lt;-</span> <span class="fu">aov</span>(growth <span class="sc">~</span> light_level<span class="sc">*</span>fertilizer, <span class="at">data =</span> growth_long2)</span>
 <span id="cb14-3"><a></a><span class="fu">summary</span>(model2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
-<pre><code>                       Df Sum Sq Mean Sq F value  Pr(&gt;F)   
-light_level             2  417.2  208.60  12.281 0.00125 **
-fertilizer              1    0.0    0.01   0.000 0.98257   
-light_level:fertilizer  2    3.0    1.51   0.089 0.91544   
-Residuals              12  203.8   16.99                   
+<pre><code>                       Df Sum Sq Mean Sq F value   Pr(&gt;F)    
+light_level             2  441.9  220.95  13.141 0.000949 ***
+fertilizer              1    0.3    0.32   0.019 0.893009    
+light_level:fertilizer  2    1.4    0.71   0.042 0.958755    
+Residuals              12  201.8   16.81                     
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
@@ -704,7 +700,10 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <section id="caution-in-the-face-of-interaction" class="slide level2 center">
 <h2>Caution in the face of interaction!</h2>
 <ul>
-<li><p>If interaction is determined statistically significant via an ANOVA, then generally we cannot make any assumptions about the individual effects</p></li>
+<li><p>If interaction is determined statistically significant via an ANOVA, then generally we cannot make any assumptions about the individual effects</p>
+<ul>
+<li>Even if your individual effects show as significant, heed those results with caution if the interaction is significant</li>
+</ul></li>
 <li><p>A useful tool is an <strong>interaction plot</strong></p></li>
 <li><p>This helps us visualize how two effects (variables) are related.</p></li>
 </ul>
@@ -732,37 +731,30 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <section id="creating-an-interaction-plot-1" class="slide level2 center">
 <h2>Creating an Interaction Plot</h2>
 
-<img data-src="r_files/figure-revealjs/unnamed-chunk-17-1.png" width="960" class="r-stretch"><p>This interaction plot shows little to no interaction between fertilizer and light level, which was confimed by the ANOVA.</p>
+<img data-src="r_files/figure-revealjs/unnamed-chunk-17-1.png" width="960" class="r-stretch"><p>This interaction plot shows little to no interaction between fertilizer and light level, which was confirmed by the ANOVA.</p>
 </section>
 <section id="tukeys-hsd-test-for-two-way-anova" class="slide level2 center">
 <h2>Tukey’s HSD Test for Two-Way ANOVA</h2>
-<p>Here, I’ve only printed the <code>TukeyHSD()</code> output for the light level and fertilizer interaction.</p>
+<p>Tukey’s HSD test can also be used with a two-way ANOVA.</p>
 <div class="cell">
-<div class="cell-output cell-output-stdout">
-<pre><code>                      diff         lwr        upr      p adj
-low:N-high:N  -12.78000000 -24.0829208 -1.4770792 0.02385754
-med:N-high:N   -5.83000000 -17.1329208  5.4729208 0.53773921
-high:Y-high:N  -1.02666667 -12.3295874 10.2762541 0.99954343
-low:Y-high:N  -11.80000000 -23.1029208 -0.4970792 0.03901261
-med:Y-high:N   -5.91333333 -17.2162541  5.3895874 0.52382786
-med:N-low:N     6.95000000  -4.3529208 18.2529208 0.36417249
-high:Y-low:N   11.75333333   0.4504126 23.0562541 0.03993434
-low:Y-low:N     0.98000000 -10.3229208 12.2829208 0.99963586
-med:Y-low:N     6.86666667  -4.4362541 18.1695874 0.37585455
-high:Y-med:N    4.80333333  -6.4995874 16.1062541 0.71159726
-low:Y-med:N    -5.97000000 -17.2729208  5.3329208 0.51443228
-med:Y-med:N    -0.08333333 -11.3862541 11.2195874 1.00000000
-low:Y-high:Y  -10.77333333 -22.0762541  0.5295874 0.06500207
-med:Y-high:Y   -4.88666667 -16.1895874  6.4162541 0.69777545
-med:Y-low:Y     5.88666667  -5.4162541 17.1895874 0.52826782</code></pre>
+<div class="sourceCode cell-code" id="cb17"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb17-1"><a></a><span class="co"># Tukey's HSD test for a two-way ANOVA</span></span>
+<span id="cb17-2"><a></a><span class="fu">TukeyHSD</span>(model2, <span class="at">conf.level =</span> <span class="fl">0.95</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-</div>
+<p>I didn’t include the output here, because it is long!</p>
+<ul>
+<li>Tukey’s HSD test can give great further insight, especially when your interaction is significant</li>
+</ul>
 </section>
-<section id="final-thoughts" class="slide level2 center">
-<h2>Final Thoughts</h2>
+<section id="other-anova-notes" class="slide level2 center" style="font-size: 32px">
+<h2>Other ANOVA Notes…</h2>
 <ul>
 <li><p>If you ever encounter a scenario where <code>residual</code> degrees of freedom (<code>df</code>) are equal to or smaller than any main effect or interaction, ANOVA results won’t be reliable</p></li>
-<li><p>If you are ever worried that variances between groups</p></li>
+<li><p>If you are ever worried that variances between groups aren’t equal, the <code>leveneTest()</code> function can test for equality of variances</p></li>
+<li><p>If you have a scenario where you have an <strong>unbalanced</strong> experiment or missing data points, <strong>Type III sums of squares</strong> should be used in the ANOVA.</p>
+<ul>
+<li><p>The <code>aov()</code> function we used uses <strong>Type I sums of squares</strong>.</p></li>
+<li><p>The library <code>cars</code> has an <code>Anova()</code> function with Type III capabilities.</p></li>
+</ul></li>
 </ul>
 
 <div class="quarto-auto-generated-content">
@@ -771,7 +763,7 @@ med:Y-low:Y     5.88666667  -5.4162541 17.1895874 0.52826782</code></pre>
 
 </div>
 </div>
-</section></section>
+</section>
     </div>
   </div>
 
