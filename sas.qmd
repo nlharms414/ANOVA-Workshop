@@ -3,6 +3,7 @@ title: "Analysis of Variance in SAS"
 author: "Nicole Harms"
 date: "02/16/2026"
 date-format: long
+image: "sas logo.png"
 format: 
   revealjs:
     theme: simple

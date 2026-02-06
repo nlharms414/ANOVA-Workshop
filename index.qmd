@@ -8,6 +8,6 @@ listing:
     - "*.qmd"
   type: grid
   sort: "date"
-  fields: [title, date, author]
+  fields: [title, date, author, image]
 ---
 

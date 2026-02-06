@@ -3,6 +3,7 @@ title: "Analysis of Variance in R"
 author: "Nicole Harms"
 date: "02/09/2026"
 date-format: long
+image: "r logo.jpeg"
 format: 
   revealjs:
     theme: simple
@@ -267,7 +268,7 @@ anova(model)
 
 ## Tukey's HSD Test {.center}
 
-Tukey's honestly significant difference (HSD) test allows us to see which groups are significantly different from each other
+Tukey's honestly significant difference (HSD) test allows us to see which groups are significantly different from each other.
 
 ```{r}
 #| echo: true
