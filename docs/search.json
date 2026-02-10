@@ -88,7 +88,7 @@
     "href": "r.html#how-does-anova-work",
     "title": "Analysis of Variance in R",
     "section": "How does ANOVA work?",
-    "text": "How does ANOVA work?\nANOVA breaks down total data set variance into two components:\n\n\nWithin-group variance: How much do individual units within a group vary from each other?\nBetween-group variance: How much do the different groups vary from each other?\n\n\n\nIf between-group variance is larger, this often suggests that the group means are different."
+    "text": "How does ANOVA work?\nANOVA breaks down total variance of the response variable into two components:\n\n\nWithin-group variance: How much do individual units within a group vary from each other?\nBetween-group variance: How much do the different groups vary from each other?\n\n\n\nIf between-group variance is larger, this often suggests that the group means are different."
   },
   {
     "objectID": "r.html#anova-hypotheses",
@@ -200,7 +200,7 @@
     "href": "r.html#other-anova-notes",
     "title": "Analysis of Variance in R",
     "section": "Other ANOVA Notes…",
-    "text": "Other ANOVA Notes…\n\nIf you ever encounter a scenario where residual degrees of freedom (df) are equal to or smaller than any main effect or interaction, ANOVA results won’t be reliable\nIf you are ever worried that variances between groups aren’t equal, the leveneTest() function can test for equality of variances\nIf you have a scenario where you have an unbalanced experiment or missing data points, Type III sums of squares should be used in the ANOVA.\n\nThe aov() function we used uses Type I sums of squares.\nThe library cars has an Anova() function with Type III capabilities."
+    "text": "Other ANOVA Notes…\n\nIf you ever encounter a scenario where residual degrees of freedom (df) are equal to or smaller than any main effect or interaction, ANOVA results won’t be reliable\nIf you are ever worried that variances between groups aren’t equal, the leveneTest() function can test for equality of variances\nIf you have a scenario where you have an unbalanced experiment or missing data points, Type III sums of squares should be used in the ANOVA.\n\nThe aov() function we used uses Type I sums of squares.\nThe library car has an Anova() function with Type III capabilities."
   },
   {
     "objectID": "index.html",

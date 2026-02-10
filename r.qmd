@@ -215,7 +215,7 @@ Our data looks fairly normal, so we can proceed with an ANOVA. We will assume th
 
 ## How does ANOVA work? {.center}
 
-ANOVA breaks down total data set variance into two components:
+ANOVA breaks down total variance of the response variable into two components:
 
 ::: incremental
 -   ***Within*****-group variance:** How much do individual units within a group vary from each other?
@@ -442,5 +442,5 @@ I didn't include the output here, because it is long!
 
     -   The `aov()` function we used uses **Type I sums of squares**.
     
-    -   The library `cars` has an `Anova()` function with Type III capabilities.
+    -   The library `car` has an `Anova()` function with Type III capabilities.
 
