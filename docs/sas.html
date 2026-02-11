@@ -30,6 +30,71 @@
       margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
       vertical-align: middle;
     }
+    /* CSS for syntax highlighting */
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { display: inline-block; text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      { color: #003b4f; background-color: #f1f3f5; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #003b4f; } /* Normal */
+    code span.al { color: #ad0000; } /* Alert */
+    code span.an { color: #5e5e5e; } /* Annotation */
+    code span.at { color: #657422; } /* Attribute */
+    code span.bn { color: #ad0000; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #003b4f; font-weight: bold; } /* ControlFlow */
+    code span.ch { color: #20794d; } /* Char */
+    code span.cn { color: #8f5902; } /* Constant */
+    code span.co { color: #5e5e5e; } /* Comment */
+    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+    code span.dt { color: #ad0000; } /* DataType */
+    code span.dv { color: #ad0000; } /* DecVal */
+    code span.er { color: #ad0000; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #ad0000; } /* Float */
+    code span.fu { color: #4758ab; } /* Function */
+    code span.im { color: #00769e; } /* Import */
+    code span.in { color: #5e5e5e; } /* Information */
+    code span.kw { color: #003b4f; font-weight: bold; } /* Keyword */
+    code span.op { color: #5e5e5e; } /* Operator */
+    code span.ot { color: #003b4f; } /* Other */
+    code span.pp { color: #ad0000; } /* Preprocessor */
+    code span.sc { color: #5e5e5e; } /* SpecialChar */
+    code span.ss { color: #20794d; } /* SpecialString */
+    code span.st { color: #20794d; } /* String */
+    code span.va { color: #111111; } /* Variable */
+    code span.vs { color: #20794d; } /* VerbatimString */
+    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
   <link rel="stylesheet" href="site_libs/revealjs/dist/theme/quarto.css">
   <link href="site_libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
@@ -339,8 +404,347 @@ Nicole Harms
 
   <p class="date">February 16, 2026</p>
 </section>
-<section class="slide level2">
+<section id="what-is-analysis-of-variance" class="slide level2 center">
+<h2>What is Analysis of Variance?</h2>
+<p>Analysis of Variance (ANOVA) compares the means of some <strong><em>dependent variable</em></strong> across <strong><em>three or more groups</em></strong> of an <strong><em>independent variable</em></strong> to determine if the group means are statistically different.</p>
+</section>
+<section id="when-would-i-use-anova" class="slide level2 center">
+<h2>When would I use ANOVA?</h2>
+<p>You might use ANOVA when…</p>
+<ul>
+<li><p>You have a categorical independent variable with three or more factors (levels), and</p></li>
+<li><p>A continuous, dependent variable you are interested in measuring.</p></li>
+</ul>
+</section>
+<section id="when-would-i-use-anova-1" class="slide level2 center">
+<h2>When would I use ANOVA?</h2>
+<p>Examples:</p>
+<ul>
+<li><p>Comparing three diets, based on how much weight a person lost.</p></li>
+<li><p>Determining if there is a difference in how 10 different medications affect blood pressure.</p></li>
+<li><p>Analyzing the effects of three light levels, fertilizer or not, and their interaction on a plant’s growth.</p></li>
+</ul>
+</section>
+<section id="example" class="slide level2 center" style="font-size: 36px">
+<h2>Example</h2>
+<p>Let’s look at an example for how we would run an ANOVA in SAS. Say we have the following scenario:</p>
+<div>
+<ul>
+<li class="fragment"><p>We want to look at how three different light levels (low, medium, high) affect the growth of a plant (in centimeters).</p></li>
+<li class="fragment"><p>In a greenhouse, there are 18 grow lights; six with each light level</p></li>
+<li class="fragment"><p>18 separate plants are randomly assigned to each grow light</p></li>
+<li class="fragment"><p>All other conditions are constant across all plants, and after 12 weeks, total growth is measured</p></li>
+</ul>
+</div>
+</section>
+<section id="example-data" class="slide level2 center">
+<h2>Example Data</h2>
+<p>Say we have the following sample data.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a><span class="sc">/</span><span class="er">*</span> read <span class="cf">in</span> data <span class="sc">*</span><span class="er">/</span></span>
+<span id="cb1-2"><a></a>data growth;</span>
+<span id="cb1-3"><a></a>    input plant <span class="sc">$</span> low med high;</span>
+<span id="cb1-4"><a></a>    datalines;</span>
+<span id="cb1-5"><a></a>plant1 <span class="fl">18.51</span> <span class="fl">19.19</span> <span class="fl">19.23</span></span>
+<span id="cb1-6"><a></a>plant2 <span class="fl">5.99</span>  <span class="fl">19.09</span> <span class="fl">24.27</span>    </span>
+<span id="cb1-7"><a></a>plant3 <span class="fl">12.02</span> <span class="fl">17.90</span> <span class="fl">27.34</span></span>
+<span id="cb1-8"><a></a>plant4 <span class="fl">7.06</span>  <span class="fl">21.47</span> <span class="fl">22.23</span></span>
+<span id="cb1-9"><a></a>plant5 <span class="fl">14.96</span> <span class="fl">20.38</span> <span class="fl">22.92</span></span>
+<span id="cb1-10"><a></a>plant6 <span class="fl">13.56</span> <span class="fl">14.58</span> <span class="fl">28.77</span>    </span>
+<span id="cb1-11"><a></a>;</span>
+<span id="cb1-12"><a></a>run;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="example-data-output" class="slide level2 center">
+<h2>Example Data Output</h2>
 
+<img data-src="images/growth.png" class="quarto-figure quarto-figure-center r-stretch"><div class="fragment">
+<p>Note: This data is in <strong>wide</strong> format, but we’ll need it in <strong>long</strong> format in order to analyze it.</p>
+</div>
+</section>
+<section id="quick-tip-reformatting-data" class="slide level2 center">
+<h2>Quick Tip! Reformatting Data</h2>
+<p>The Transpose procedure can easily transform our data from wide to long format.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb2" data-code-line-numbers="|2|3|4|"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb2-1"><a></a><span class="sc">/</span><span class="er">*</span> Putting data <span class="cf">in</span> long format <span class="sc">*</span><span class="er">/</span></span>
+<span id="cb2-2"><a></a>proc transpose data<span class="ot">=</span>growth out<span class="ot">=</span><span class="fu">growth_long</span> (<span class="at">rename=</span>(<span class="at">col1=</span>growth <span class="at">_name_=</span>light_level));</span>
+<span id="cb2-3"><a></a>   by plant;</span>
+<span id="cb2-4"><a></a>   var low med high;</span>
+<span id="cb2-5"><a></a>run;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+
+<img data-src="images/growth_long.png" class="quarto-figure quarto-figure-center r-stretch"></section>
+<section id="anova-assumptions" class="slide level2 center">
+<h2>ANOVA Assumptions</h2>
+<p>To use ANOVA, certain assumptions must be met, or results will not be reliable.</p>
+<div>
+<ul>
+<li class="fragment"><p>Data is normally distributed</p></li>
+<li class="fragment"><p>Observations are independent of each other</p></li>
+<li class="fragment"><p>Variances for each group are approximately equal</p></li>
+</ul>
+</div>
+</section>
+<section id="anova-assumptions-1" class="slide level2">
+<h2>ANOVA Assumptions</h2>
+
+<img data-src="sas_files/figure-revealjs/unnamed-chunk-3-1.png" class="quarto-figure quarto-figure-center r-stretch" width="960"><p>Here, each group is normally distributed with different means and equal variance.</p>
+</section>
+<section id="anova-assumptions-2" class="slide level2">
+<h2>ANOVA Assumptions</h2>
+
+<img data-src="sas_files/figure-revealjs/unnamed-chunk-4-1.png" class="quarto-figure quarto-figure-center r-stretch" width="960"><p>Here, groups are normally distributed with different means, but variances are unequal.</p>
+</section>
+<section id="checking-for-normality" class="slide level2 center">
+<h2>Checking for Normality</h2>
+<p>In a general sense, we want to check that our data approximately follows the normal distribution.</p>
+
+<img data-src="sas_files/figure-revealjs/unnamed-chunk-5-1.png" class="quarto-figure quarto-figure-center r-stretch" width="960"></section>
+<section id="checking-for-normality-1" class="slide level2 center">
+<h2>Checking for Normality</h2>
+<p>Let’s see if our data looks normal by making a histogram.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb3" data-code-line-numbers="|2|3|"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb3-1"><a></a><span class="sc">/</span><span class="er">*</span> Histogram of growth variable <span class="sc">*</span><span class="er">/</span></span>
+<span id="cb3-2"><a></a>proc sgplot data<span class="ot">=</span>growth_long;</span>
+<span id="cb3-3"><a></a>    histogram growth;</span>
+<span id="cb3-4"><a></a>run;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="checking-for-normality-2" class="slide level2 center">
+<h2>Checking for Normality</h2>
+
+<img data-src="images/hist.png" class="quarto-figure quarto-figure-center r-stretch" width="533"><div class="fragment">
+<p>Our data looks fairly normal, so we can proceed with an ANOVA. We will assume that the variances are approximately equal.</p>
+</div>
+</section>
+<section id="how-does-anova-work" class="slide level2 center">
+<h2>How does ANOVA work?</h2>
+<p>ANOVA breaks down total variance of the response variable into two components:</p>
+<div>
+<ul>
+<li class="fragment"><p><strong><em>Within</em>-group variance:</strong> How much do individual units within a group vary from each other?</p></li>
+<li class="fragment"><p><strong><em>Between</em>-group variance:</strong> How much do the different groups vary from each other?</p></li>
+</ul>
+</div>
+<div class="fragment">
+<p>If <strong><em>between-group variance</em></strong> is larger, this often suggests that the group means are different.</p>
+</div>
+</section>
+<section id="anova-hypotheses" class="slide level2 center">
+<h2>ANOVA Hypotheses</h2>
+<p>An ANOVA tests the following hypotheses:</p>
+<div>
+<ul>
+<li class="fragment"><p><span class="math inline">\(H_0:\)</span> All group means are equal.</p></li>
+<li class="fragment"><p><span class="math inline">\(H_A:\)</span> At least one group mean is different.</p></li>
+</ul>
+</div>
+<div class="fragment">
+<p>We test these hypotheses with an F-test.</p>
+<ul>
+<li>If we get a p-value &lt; 0.05, then we have evidence in favor of <span class="math inline">\(H_A\)</span></li>
+</ul>
+</div>
+</section>
+<section id="anova-in-sas" class="slide level2 center">
+<h2>ANOVA In SAS</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb4" data-code-line-numbers="|2|3|4|"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb4-1"><a></a><span class="sc">/</span><span class="er">*</span> Run an ANOVA using proc glm <span class="sc">*</span><span class="er">/</span></span>
+<span id="cb4-2"><a></a>proc glm data<span class="ot">=</span>growth_long;</span>
+<span id="cb4-3"><a></a>   class light_level;</span>
+<span id="cb4-4"><a></a>   model growth <span class="ot">=</span> light_level;</span>
+<span id="cb4-5"><a></a>run;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+
+<img data-src="images/model1.png" class="quarto-figure quarto-figure-center r-stretch"><div class="fragment">
+<p>This output shows us that the model is significant, but we want to look at the individual effect.</p>
+</div>
+</section>
+<section id="interpreting-the-results" class="slide level2 center">
+<h2>Interpreting the Results</h2>
+
+<img data-src="images/effect1.png" class="quarto-figure quarto-figure-center r-stretch"><ul>
+<li><p>Here, our p-value is extremely small (0.0002), so we can conclude that at least one of the groups has a different mean.</p></li>
+<li><p>The question remains: which groups are different?</p></li>
+</ul>
+</section>
+<section id="tukeys-hsd-test" class="slide level2 center" style="font-size: 34px">
+<h2>Tukey’s HSD Test</h2>
+<p>Tukey’s honestly significant difference (HSD) test allows us to see which groups are significantly different from each other.</p>
+<ul>
+<li>To run Tukey’s HSD test, we simply modify our previous code</li>
+</ul>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb5" data-code-line-numbers="|5|"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb5-1"><a></a><span class="sc">/</span><span class="er">*</span> Tukeys HSD Test <span class="sc">*</span><span class="er">/</span></span>
+<span id="cb5-2"><a></a>proc glm data<span class="ot">=</span>growth_long;</span>
+<span id="cb5-3"><a></a>   class light_level;</span>
+<span id="cb5-4"><a></a>   model growth <span class="ot">=</span> light_level;</span>
+<span id="cb5-5"><a></a>   means light_level <span class="sc">/</span> tukey cldiff;</span>
+<span id="cb5-6"><a></a>run;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Tukey’s HSD test will compare every combination of groups and determine which pairs are statistically different from each other.</p>
+</section>
+<section id="tukeys-hsd-test-results" class="slide level2 center">
+<h2>Tukey’s HSD Test Results</h2>
+
+<img data-src="images/tukeys1.png" class="quarto-figure quarto-figure-center r-stretch"><ul>
+<li>The astrisks in the last column indicate a difference is statistically significant.</li>
+<li>Here, we see that the low &amp; high and low &amp; medium groups are statiscially different, but not medium &amp; high</li>
+</ul>
+</section>
+<section id="one-way-vs.-two-way-anova" class="slide level2 center">
+<h2>One-Way vs.&nbsp;Two-Way ANOVA</h2>
+<ul>
+<li><p>If two <em>independent categorical variables</em> need to be analyzed, this is referred to as a <em>two-way</em> ANOVA</p>
+<ul>
+<li>This can be extended to more than two variables</li>
+</ul></li>
+<li><p>Two-way ANOVA analyzes:</p>
+<ul>
+<li><p>Each independent variable</p></li>
+<li><p>How they interact (if applicable)</p></li>
+</ul></li>
+</ul>
+</section>
+<section id="two-way-anova-example" class="slide level2 center">
+<h2>Two-Way Anova Example</h2>
+<p>Consider our original example.</p>
+<ul>
+<li><p>Say we have a second independent variable to analyze.</p></li>
+<li><p>Now we also want to see if the presence of fertilizer or not affects plant growth.</p></li>
+<li><p>We also want to see if it interacts with light level.</p></li>
+</ul>
+</section>
+<section id="new-data-set" class="slide level2 center">
+<h2>New Data Set</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb6-1"><a></a><span class="sc">/</span><span class="er">*</span> New data set <span class="sc">*</span><span class="er">/</span></span>
+<span id="cb6-2"><a></a>data growth2;</span>
+<span id="cb6-3"><a></a>    input plant <span class="sc">$</span> fertilizer <span class="sc">$</span> low med high;</span>
+<span id="cb6-4"><a></a>    datalines;</span>
+<span id="cb6-5"><a></a>plant1 Y <span class="fl">18.51</span> <span class="fl">19.19</span> <span class="fl">19.23</span></span>
+<span id="cb6-6"><a></a>plant2 N <span class="fl">5.99</span>  <span class="fl">19.09</span> <span class="fl">24.27</span>  </span>
+<span id="cb6-7"><a></a>plant3 Y <span class="fl">12.02</span> <span class="fl">17.90</span> <span class="fl">27.34</span></span>
+<span id="cb6-8"><a></a>plant4 N <span class="fl">7.06</span>  <span class="fl">21.47</span> <span class="fl">22.23</span></span>
+<span id="cb6-9"><a></a>plant5 Y <span class="fl">14.96</span> <span class="fl">20.38</span> <span class="fl">22.92</span></span>
+<span id="cb6-10"><a></a>plant6 N <span class="fl">13.56</span> <span class="fl">14.58</span> <span class="fl">28.77</span>  </span>
+<span id="cb6-11"><a></a>;</span>
+<span id="cb6-12"><a></a>run;</span>
+<span id="cb6-13"><a></a></span>
+<span id="cb6-14"><a></a>proc transpose data<span class="ot">=</span>growth2 out<span class="ot">=</span><span class="fu">growth_long2</span> (<span class="at">rename=</span>(<span class="at">col1=</span>growth <span class="at">_name_=</span>light_level));</span>
+<span id="cb6-15"><a></a>   by plant fertilizer;</span>
+<span id="cb6-16"><a></a>   var low med high;</span>
+<span id="cb6-17"><a></a>run;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="new-data-set-1" class="slide level2 center">
+<h2>New Data Set</h2>
+
+<img data-src="images/growth_long2.png" class="quarto-figure quarto-figure-center r-stretch"></section>
+<section id="two-way-anova-in-sas" class="slide level2 center">
+<h2>Two-Way ANOVA in SAS</h2>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb7" data-code-line-numbers="|3|4|"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb7-1"><a></a><span class="sc">/</span><span class="er">*</span> Run a two<span class="sc">-</span>way ANOVA with proc glm <span class="sc">*</span><span class="er">/</span></span>
+<span id="cb7-2"><a></a>proc glm data<span class="ot">=</span>growth_long2 order<span class="ot">=</span>data;</span>
+<span id="cb7-3"><a></a>   class light_level fertilizer;</span>
+<span id="cb7-4"><a></a>   model growth <span class="ot">=</span> light_level fertilizer light_level<span class="sc">*</span>fertilizer;</span>
+<span id="cb7-5"><a></a>run;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+
+<img data-src="images/model2.png" class="quarto-figure quarto-figure-center r-stretch"></section>
+<section id="two-way-anova-in-sas-1" class="slide level2 center">
+<h2>Two-Way ANOVA in SAS</h2>
+
+<img data-src="images/effect2.png" class="quarto-figure quarto-figure-center r-stretch"><ul>
+<li><p>“light_lev*fertilizer” gives the analysis for the interaction.</p></li>
+<li><p>The p-value for the interaction is 0.143, meaning the interaction between light level and fertilizer is not statistically significant.</p></li>
+</ul>
+</section>
+<section id="caution-in-the-face-of-interaction" class="slide level2 center">
+<h2>Caution in the face of interaction!</h2>
+<ul>
+<li><p>Even if interaction is not determined statistically significant via an ANOVA, results still need to be looked at with caution</p>
+<ul>
+<li><p>Interaction may still be present <em>even if it is not statistically significant.</em></p></li>
+<li><p>Individual effects may not have meaning, even if interaction is not significant.</p></li>
+</ul></li>
+<li><p>A useful tool is an <strong>interaction plot</strong></p></li>
+<li><p>This helps us visualize how two effects (variables) are related.</p></li>
+</ul>
+</section>
+<section id="interaction-plot-no-interaction" class="slide level2 center">
+<h2>Interaction Plot: No Interaction</h2>
+
+<img data-src="sas_files/figure-revealjs/unnamed-chunk-11-1.png" width="960" class="r-stretch"></section>
+<section id="interaction-plot-interaction-is-present" class="slide level2 center">
+<h2>Interaction Plot: Interaction is Present</h2>
+
+<img data-src="sas_files/figure-revealjs/unnamed-chunk-12-1.png" width="960" class="r-stretch"><p>Both plots indicate interaction is present.</p>
+</section>
+<section id="creating-an-interaction-plot-in-sas" class="slide level2 center">
+<h2>Creating an Interaction Plot in SAS</h2>
+<p>The GLM Procedure automatically generates an interaction plot as part of its output.</p>
+
+<img data-src="images/interaction1.png" class="quarto-figure quarto-figure-center r-stretch"><div class="fragment">
+<p>Here, we can see there is some sort of interaction going on.</p>
+</div>
+</section>
+<section id="creating-an-interaction-plot-in-sas-1" class="slide level2 center">
+<h2>Creating an Interaction Plot in SAS</h2>
+<p>Often, it is helpful to switch the axes. We can generate a new interaction plot by modifying our existing code and using the PLM procedure.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb8" data-code-line-numbers="|5|8|9|"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb8-1"><a></a><span class="sc">/</span><span class="er">*</span> Generate an interaction plot with flipped axes <span class="sc">*</span><span class="er">/</span></span>
+<span id="cb8-2"><a></a>proc glm data<span class="ot">=</span>growth_long2 order<span class="ot">=</span>data;</span>
+<span id="cb8-3"><a></a>   class light_level fertilizer;</span>
+<span id="cb8-4"><a></a>   model growth <span class="ot">=</span> light_level fertilizer light_level<span class="sc">*</span>fertilizer;</span>
+<span id="cb8-5"><a></a>   store twoway;</span>
+<span id="cb8-6"><a></a>run;</span>
+<span id="cb8-7"><a></a></span>
+<span id="cb8-8"><a></a>proc plm restore<span class="ot">=</span>twoway;</span>
+<span id="cb8-9"><a></a>    effectplot <span class="fu">interaction</span>(<span class="at">x=</span>fertilizer <span class="at">sliceby=</span>light_level);</span>
+<span id="cb8-10"><a></a>run;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="creating-an-interaction-plot-in-sas-2" class="slide level2 center">
+<h2>Creating an Interaction Plot in SAS</h2>
+<p>Here, the interaction is not as noticeable.</p>
+
+<img data-src="images/interaction2.png" class="quarto-figure quarto-figure-center r-stretch"><div class="fragment">
+<p>Moral of the story: always look at your data in more ways than one!</p>
+</div>
+</section>
+<section id="tukeys-hsd-test-for-two-way-anova" class="slide level2 center">
+<h2>Tukey’s HSD Test for Two-Way ANOVA</h2>
+<p>Tukey’s HSD test can also be used with a two-way ANOVA.</p>
+<div class="cell">
+<div class="sourceCode cell-code" id="cb9"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb9-1"><a></a><span class="sc">/</span><span class="er">*</span> Run a two<span class="sc">-</span>way ANOVA with proc glm <span class="sc">*</span><span class="er">/</span></span>
+<span id="cb9-2"><a></a>proc glm data<span class="ot">=</span>growth_long2 order<span class="ot">=</span>data;</span>
+<span id="cb9-3"><a></a>   class light_level fertilizer;</span>
+<span id="cb9-4"><a></a>   model growth <span class="ot">=</span> light_level fertilizer light_level<span class="sc">*</span>fertilizer;</span>
+<span id="cb9-5"><a></a>   means light_level fertilizer<span class="sc">/</span> tukey cldiff;</span>
+<span id="cb9-6"><a></a>run;</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>I didn’t include the output here, because it is long!</p>
+<ul>
+<li>Tukey’s HSD test can give great further insight, especially when your interaction is significant</li>
+</ul>
+</section>
+<section id="other-anova-notes" class="slide level2 center" style="font-size: 30px">
+<h2>Other ANOVA Notes…</h2>
+<div>
+<ul>
+<li class="fragment"><p>If you ever encounter a scenario where error degrees of freedom are equal to or smaller than any main effect or interaction, ANOVA results won’t be reliable.</p></li>
+<li class="fragment"><p>If you are ever worried that variances between groups aren’t equal, adding the line <code>means group_variable / hovtest=levene(type=abs);</code> to the GLM procedure will test for equality of variances.</p>
+<ul>
+<li class="fragment">*Note that <code>group_variable</code> is arbitrary, replace with your grouping variable’s name</li>
+</ul></li>
+<li class="fragment"><p>If you have a scenario where you have an <strong>unbalanced</strong> experiment or missing data points, you’ll want to rely on results from an ANOVA using <strong>Type III sums of squares</strong>.</p>
+<ul>
+<li class="fragment"><p>The GLM procedure gives both <strong>Type I</strong> and <strong>Type III</strong> sums of squares analyses.</p></li>
+<li class="fragment"><p>If your design is <strong>balanced</strong>, Type I and Type III outputs will be the same.</p></li>
+</ul></li>
+</ul>
+</div>
 
 <div class="quarto-auto-generated-content">
 <p><img src="logo.jpg" class="slide-logo"></p>
@@ -559,6 +963,44 @@ Nicole Harms
         ]
       });
     </script>
+    
+    <script>
+      // htmlwidgets need to know to resize themselves when slides are shown/hidden.
+      // Fire the "slideenter" event (handled by htmlwidgets.js) when the current
+      // slide changes (different for each slide format).
+      (function () {
+        // dispatch for htmlwidgets
+        function fireSlideEnter() {
+          const event = window.document.createEvent("Event");
+          event.initEvent("slideenter", true, true);
+          window.document.dispatchEvent(event);
+        }
+
+        function fireSlideChanged(previousSlide, currentSlide) {
+          fireSlideEnter();
+
+          // dispatch for shiny
+          if (window.jQuery) {
+            if (previousSlide) {
+              window.jQuery(previousSlide).trigger("hidden");
+            }
+            if (currentSlide) {
+              window.jQuery(currentSlide).trigger("shown");
+            }
+          }
+        }
+
+        // hookup for slidy
+        if (window.w3c_slidy) {
+          window.w3c_slidy.add_observer(function (slide_num) {
+            // slide_num starts at position 1
+            fireSlideChanged(null, w3c_slidy.slides[slide_num - 1]);
+          });
+        }
+
+      })();
+    </script>
+
     <script id="quarto-html-after-body" type="application/javascript">
     window.document.addEventListener("DOMContentLoaded", function (event) {
       const toggleBodyColorMode = (bsSheetEl) => {

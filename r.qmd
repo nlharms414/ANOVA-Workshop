@@ -55,7 +55,7 @@ Say we have the following sample data.
 #| echo: true
 # Reading in data
 growth <- data.frame(plant = c("plant 1","plant 2","plant 3","plant 4","plant 5","plant 6"),
-                     low = c(18.51,5.99,11.02,7.06,14.96,13.56),
+                     low = c(18.51,5.99,12.02,7.06,14.96,13.56),
                      med = c(19.19,19.09,17.90,21.47,20.38,14.58),
                      high = c(19.23,24.27,27.34,22.23,22.92,28.77))
 growth
@@ -275,7 +275,7 @@ Tukey's honestly significant difference (HSD) test allows us to see which groups
 #| eval: false
 # Tukey's HSD test
 TukeyHSD(model, conf.level = 0.95) # default to 95% confidence
-``` 
+```
 
 Tukey's HSD test will compare every combination of groups and determine which pairs are statistically different from each other.
 
@@ -283,11 +283,11 @@ Tukey's HSD test will compare every combination of groups and determine which pa
 
 ```{r}
 TukeyHSD(model, conf.level = 0.95) # default to 95% confidence
-``` 
+```
 
 -   `diff` gives the difference in means for the two groups
 -   `p adj` gives the p-value for the difference in two groups
--   Here, we see that the low & high and low & medium groups are statiscially different, but not medium & high 
+-   Here, we see that the low & high and low & medium groups are statiscially different, but not medium & high
 
 ## One-Way vs. Two-Way ANOVA {.center}
 
@@ -324,6 +324,7 @@ growth_long2 <- pivot_longer(data = growth2,
                             cols = "low":"high",
                             names_to = "light_level",
                             values_to = "growth")
+growth_long2$light_level <- factor(growth_long2$light_level, levels = c("low","med","high"))
 head(growth_long2)
 ```
 
@@ -339,13 +340,15 @@ summary(model2)
 
 -   `light_level:fertilizer` gives the analysis for the interaction.
 
--   The p-value for the interaction is 0.915, indicating there is no evidence of an interaction between fertilizer and light level.
+-   The p-value for the interaction is 0.143, meaning the interaction between light level and fertilizer is not statistically significant.
 
-## Caution in the face of interaction! {.center}
+## Caution when interpreting interaction! {.center}
 
--   If interaction is determined statistically significant via an ANOVA, then generally we cannot make any assumptions about the individual effects
+-   Even if interaction is not determined statistically significant via an ANOVA, results still need to be looked at with caution
 
-    -   Even if your individual effects show as significant, heed those results with caution if the interaction is significant
+    -   Interaction may still be present *even if it is not statistically significant.*
+    
+    -   Individual effects may not have meaning, even if interaction is not significant.
 
 -   A useful tool is an **interaction plot**
 
@@ -401,13 +404,15 @@ Both plots indicate interaction is present.
 interaction.plot(x.factor = growth_long2$fertilizer,
                  trace.factor = growth_long2$light_level, 
                  response = growth_long2$growth, fun = mean,
-                 xlab = "Fertilizer", ylab = "Growth (cm)", trace.label = "Light Level",
+                 xlab = "Fertilizer", ylab = "Growth (cm)", trace.label = "Light level",
                  col = c("#E69F00","#0072B2","#CC79A7"), lty = 1)
+
 ```
 
 ## Creating an Interaction Plot {.center}
 
 ```{r}
+#| fig-align: center
 interaction.plot(x.factor = growth_long2$fertilizer,
                  trace.factor = growth_long2$light_level, 
                  response = growth_long2$growth, fun = mean,
@@ -415,7 +420,24 @@ interaction.plot(x.factor = growth_long2$fertilizer,
                  col = c("#E69F00","#0072B2","#CC79A7"), lty = 1)
 ```
 
-This interaction plot shows little to no interaction between fertilizer and light level, which was confirmed by the ANOVA.
+This interaction plot makes it hard to tell if there is interaction between fertilizer and light level.
+
+## Creating an Interaction Plot {.center}
+
+Often, it is helpful to switch the axes. Now, we clearly see some interaction between the two factors.
+
+```{r}
+#| fig-align: center
+interaction.plot(x.factor = growth_long2$light_level,
+                 trace.factor = growth_long2$fertilizer, 
+                 response = growth_long2$growth, fun = mean,
+                 xlab = "Light level", ylab = "Growth (cm)", trace.label = "Fertilizer",
+                 col = c("#CC79A7","#0072B2"), lty = 1)
+```
+
+. . .
+
+Moral of the story: always look at your data in more ways than one!
 
 ## Tukey's HSD Test for Two-Way ANOVA {.center}
 
@@ -441,6 +463,5 @@ I didn't include the output here, because it is long!
 -   If you have a scenario where you have an **unbalanced** experiment or missing data points, **Type III sums of squares** should be used in the ANOVA.
 
     -   The `aov()` function we used uses **Type I sums of squares**.
-    
-    -   The library `car` has an `Anova()` function with Type III capabilities.
 
+    -   The library `car` has an `Anova()` function with Type III capabilities.

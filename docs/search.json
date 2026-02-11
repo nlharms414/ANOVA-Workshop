@@ -32,7 +32,7 @@
     "href": "r.html#example-data",
     "title": "Analysis of Variance in R",
     "section": "Example Data",
-    "text": "Example Data\nSay we have the following sample data.\n\n# Reading in data\ngrowth &lt;- data.frame(plant = c(\"plant 1\",\"plant 2\",\"plant 3\",\"plant 4\",\"plant 5\",\"plant 6\"),\n                     low = c(18.51,5.99,11.02,7.06,14.96,13.56),\n                     med = c(19.19,19.09,17.90,21.47,20.38,14.58),\n                     high = c(19.23,24.27,27.34,22.23,22.92,28.77))\ngrowth\n\n    plant   low   med  high\n1 plant 1 18.51 19.19 19.23\n2 plant 2  5.99 19.09 24.27\n3 plant 3 11.02 17.90 27.34\n4 plant 4  7.06 21.47 22.23\n5 plant 5 14.96 20.38 22.92\n6 plant 6 13.56 14.58 28.77\n\n\n\nNote: This data is in wide format, but we’ll need it in long format in order to analyze it."
+    "text": "Example Data\nSay we have the following sample data.\n\n# Reading in data\ngrowth &lt;- data.frame(plant = c(\"plant 1\",\"plant 2\",\"plant 3\",\"plant 4\",\"plant 5\",\"plant 6\"),\n                     low = c(18.51,5.99,12.02,7.06,14.96,13.56),\n                     med = c(19.19,19.09,17.90,21.47,20.38,14.58),\n                     high = c(19.23,24.27,27.34,22.23,22.92,28.77))\ngrowth\n\n    plant   low   med  high\n1 plant 1 18.51 19.19 19.23\n2 plant 2  5.99 19.09 24.27\n3 plant 3 12.02 17.90 27.34\n4 plant 4  7.06 21.47 22.23\n5 plant 5 14.96 20.38 22.92\n6 plant 6 13.56 14.58 28.77\n\n\n\nNote: This data is in wide format, but we’ll need it in long format in order to analyze it."
   },
   {
     "objectID": "r.html#quick-tip-reformatting-data",
@@ -102,14 +102,14 @@
     "href": "r.html#anova-in-r",
     "title": "Analysis of Variance in R",
     "section": "ANOVA In R",
-    "text": "ANOVA In R\n\n# Run an ANOVA\nmodel &lt;- aov(growth ~ light_level, data = growth_long)\nsummary(model)\n\n            Df Sum Sq Mean Sq F value   Pr(&gt;F)    \nlight_level  2  454.6  227.29   16.68 0.000154 ***\nResiduals   15  204.3   13.62                     \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1"
+    "text": "ANOVA In R\n\n# Run an ANOVA\nmodel &lt;- aov(growth ~ light_level, data = growth_long)\nsummary(model)\n\n            Df Sum Sq Mean Sq F value   Pr(&gt;F)    \nlight_level  2  441.9  220.95   16.29 0.000174 ***\nResiduals   15  203.5   13.57                     \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1"
   },
   {
     "objectID": "r.html#interpreting-the-results",
     "href": "r.html#interpreting-the-results",
     "title": "Analysis of Variance in R",
     "section": "Interpreting the Results",
-    "text": "Interpreting the Results\n\n\nAnalysis of Variance Table\n\nResponse: growth\n            Df Sum Sq Mean Sq F value    Pr(&gt;F)    \nlight_level  2 454.58 227.292  16.685 0.0001536 ***\nResiduals   15 204.34  13.622                      \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n\n\nPr(&gt;F): This is the p-value from the F-test for light_level\nHere, our p-value is extremely small, so we can conclude that at least one of the groups has a different mean.\nThe question remains: which groups are different?"
+    "text": "Interpreting the Results\n\n\nAnalysis of Variance Table\n\nResponse: growth\n            Df Sum Sq Mean Sq F value   Pr(&gt;F)    \nlight_level  2 441.90 220.949  16.285 0.000174 ***\nResiduals   15 203.51  13.567                     \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n\n\nPr(&gt;F): This is the p-value from the F-test for light_level\nHere, our p-value is extremely small, so we can conclude that at least one of the groups has a different mean.\nThe question remains: which groups are different?"
   },
   {
     "objectID": "r.html#tukeys-hsd-test",
@@ -123,7 +123,7 @@
     "href": "r.html#tukeys-hsd-test-results",
     "title": "Analysis of Variance in R",
     "section": "Tukey’s HSD Test Results",
-    "text": "Tukey’s HSD Test Results\n\n\n  Tukey multiple comparisons of means\n    95% family-wise confidence level\n\nFit: aov(formula = growth ~ light_level, data = growth_long)\n\n$light_level\n               diff        lwr        upr     p adj\nlow-high -12.276667 -17.811651 -6.7416828 0.0001052\nmed-high  -5.358333 -10.893317  0.1766505 0.0584295\nmed-low    6.918333   1.383349 12.4533172 0.0141169\n\n\n\ndiff gives the difference in means for the two groups\np adj gives the p-value for the difference in two groups\nHere, we see that the low & high and low & medium groups are statiscially different, but not medium & high"
+    "text": "Tukey’s HSD Test Results\n\n\n  Tukey multiple comparisons of means\n    95% family-wise confidence level\n\nFit: aov(formula = growth ~ light_level, data = growth_long)\n\n$light_level\n               diff       lwr        upr     p adj\nlow-high -12.110000 -17.63378 -6.5862238 0.0001189\nmed-high  -5.358333 -10.88211  0.1654429 0.0578748\nmed-low    6.751667   1.22789 12.2754429 0.0162799\n\n\n\ndiff gives the difference in means for the two groups\np adj gives the p-value for the difference in two groups\nHere, we see that the low & high and low & medium groups are statiscially different, but not medium & high"
   },
   {
     "objectID": "r.html#one-way-vs.-two-way-anova",
@@ -144,14 +144,14 @@
     "href": "r.html#new-data-set",
     "title": "Analysis of Variance in R",
     "section": "New Data Set",
-    "text": "New Data Set\n\ngrowth2 &lt;- data.frame(plant = c(1:6),\n                     fertilizer = rep(c(\"Y\",\"N\"),each=3),\n                     low = c(18.51,5.99,12.02,7.06,14.96,13.56),\n                     med = c(19.19,19.09,17.90,21.47,20.38,14.58),\n                     high = c(19.23,24.27,27.34,22.23,22.92,28.77))\ngrowth_long2 &lt;- pivot_longer(data = growth2,\n                            cols = \"low\":\"high\",\n                            names_to = \"light_level\",\n                            values_to = \"growth\")\nhead(growth_long2)\n\n# A tibble: 6 × 4\n  plant fertilizer light_level growth\n  &lt;int&gt; &lt;chr&gt;      &lt;chr&gt;        &lt;dbl&gt;\n1     1 Y          low          18.5 \n2     1 Y          med          19.2 \n3     1 Y          high         19.2 \n4     2 Y          low           5.99\n5     2 Y          med          19.1 \n6     2 Y          high         24.3"
+    "text": "New Data Set\n\ngrowth2 &lt;- data.frame(plant = c(1:6),\n                     fertilizer = rep(c(\"Y\",\"N\"),each=3),\n                     low = c(18.51,5.99,12.02,7.06,14.96,13.56),\n                     med = c(19.19,19.09,17.90,21.47,20.38,14.58),\n                     high = c(19.23,24.27,27.34,22.23,22.92,28.77))\ngrowth_long2 &lt;- pivot_longer(data = growth2,\n                            cols = \"low\":\"high\",\n                            names_to = \"light_level\",\n                            values_to = \"growth\")\ngrowth_long2$light_level &lt;- factor(growth_long2$light_level, levels = c(\"low\",\"med\",\"high\"))\nhead(growth_long2)\n\n# A tibble: 6 × 4\n  plant fertilizer light_level growth\n  &lt;int&gt; &lt;chr&gt;      &lt;fct&gt;        &lt;dbl&gt;\n1     1 Y          low          18.5 \n2     1 Y          med          19.2 \n3     1 Y          high         19.2 \n4     2 Y          low           5.99\n5     2 Y          med          19.1 \n6     2 Y          high         24.3"
   },
   {
     "objectID": "r.html#two-way-anova-in-r",
     "href": "r.html#two-way-anova-in-r",
     "title": "Analysis of Variance in R",
     "section": "Two-Way ANOVA in R",
-    "text": "Two-Way ANOVA in R\n\n# Run a two-way ANOVA\nmodel2 &lt;- aov(growth ~ light_level*fertilizer, data = growth_long2)\nsummary(model2)\n\n                       Df Sum Sq Mean Sq F value   Pr(&gt;F)    \nlight_level             2  441.9  220.95  13.141 0.000949 ***\nfertilizer              1    0.3    0.32   0.019 0.893009    \nlight_level:fertilizer  2    1.4    0.71   0.042 0.958755    \nResiduals              12  201.8   16.81                     \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n\n\nlight_level:fertilizer gives the analysis for the interaction.\nThe p-value for the interaction is 0.915, indicating there is no evidence of an interaction between fertilizer and light level."
+    "text": "Two-Way ANOVA in R\n\n# Run a two-way ANOVA\nmodel2 &lt;- aov(growth ~ light_level*fertilizer, data = growth_long2)\nsummary(model2)\n\n                       Df Sum Sq Mean Sq F value   Pr(&gt;F)    \nlight_level             2  441.9  220.95  13.141 0.000949 ***\nfertilizer              1    0.3    0.32   0.019 0.893009    \nlight_level:fertilizer  2    1.4    0.71   0.042 0.958755    \nResiduals              12  201.8   16.81                     \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n\n\nlight_level:fertilizer gives the analysis for the interaction.\nThe p-value for the interaction is 0.143, meaning the interaction between light level and fertilizer is not statistically significant."
   },
   {
     "objectID": "r.html#caution-in-the-face-of-interaction",
@@ -179,14 +179,14 @@
     "href": "r.html#creating-an-interaction-plot",
     "title": "Analysis of Variance in R",
     "section": "Creating an Interaction Plot",
-    "text": "Creating an Interaction Plot\n\n# Interaction plot for light level and fertilizer\ninteraction.plot(x.factor = growth_long2$fertilizer,\n                 trace.factor = growth_long2$light_level, \n                 response = growth_long2$growth, fun = mean,\n                 xlab = \"Fertilizer\", ylab = \"Growth (cm)\", trace.label = \"Light Level\",\n                 col = c(\"#E69F00\",\"#0072B2\",\"#CC79A7\"), lty = 1)"
+    "text": "Creating an Interaction Plot\n\n# Interaction plot for light level and fertilizer\ninteraction.plot(x.factor = growth_long2$fertilizer,\n                 trace.factor = growth_long2$light_level, \n                 response = growth_long2$growth, fun = mean,\n                 xlab = \"Fertilizer\", ylab = \"Growth (cm)\", trace.label = \"Light level\",\n                 col = c(\"#E69F00\",\"#0072B2\",\"#CC79A7\"), lty = 1)"
   },
   {
     "objectID": "r.html#creating-an-interaction-plot-1",
     "href": "r.html#creating-an-interaction-plot-1",
     "title": "Analysis of Variance in R",
     "section": "Creating an Interaction Plot",
-    "text": "Creating an Interaction Plot\n\nThis interaction plot shows little to no interaction between fertilizer and light level, which was confirmed by the ANOVA."
+    "text": "Creating an Interaction Plot\n\nThis interaction plot makes it hard to tell if there is interaction between fertilizer and light level."
   },
   {
     "objectID": "r.html#tukeys-hsd-test-for-two-way-anova",
@@ -208,5 +208,285 @@
     "title": "ANOVA Workshops for R and SAS",
     "section": "",
     "text": "Analysis of Variance in R\n\n\n\nNicole Harms\n\n\nFeb 9, 2026\n\n\n\n\n\n\n\n\nNo matching items"
+  },
+  {
+    "objectID": "sas.html#what-is-analysis-of-variance",
+    "href": "sas.html#what-is-analysis-of-variance",
+    "title": "Analysis of Variance in SAS",
+    "section": "What is Analysis of Variance?",
+    "text": "What is Analysis of Variance?\nAnalysis of Variance (ANOVA) compares the means of some dependent variable across three or more groups of an independent variable to determine if the group means are statistically different."
+  },
+  {
+    "objectID": "sas.html#when-would-i-use-anova",
+    "href": "sas.html#when-would-i-use-anova",
+    "title": "Analysis of Variance in SAS",
+    "section": "When would I use ANOVA?",
+    "text": "When would I use ANOVA?\nYou might use ANOVA when…\n\nYou have a categorical independent variable with three or more factors (levels), and\nA continuous, dependent variable you are interested in measuring."
+  },
+  {
+    "objectID": "sas.html#when-would-i-use-anova-1",
+    "href": "sas.html#when-would-i-use-anova-1",
+    "title": "Analysis of Variance in SAS",
+    "section": "When would I use ANOVA?",
+    "text": "When would I use ANOVA?\nExamples:\n\nComparing three diets, based on how much weight a person lost.\nDetermining if there is a difference in how 10 different medications affect blood pressure.\nAnalyzing the effects of three light levels, fertilizer or not, and their interaction on a plant’s growth."
+  },
+  {
+    "objectID": "sas.html#example",
+    "href": "sas.html#example",
+    "title": "Analysis of Variance in SAS",
+    "section": "Example",
+    "text": "Example\nLet’s look at an example for how we would run an ANOVA in SAS. Say we have the following scenario:\n\n\nWe want to look at how three different light levels (low, medium, high) affect the growth of a plant (in centimeters).\nIn a greenhouse, there are 18 grow lights; six with each light level\n18 separate plants are randomly assigned to each grow light\nAll other conditions are constant across all plants, and after 12 weeks, total growth is measured"
+  },
+  {
+    "objectID": "sas.html#example-data",
+    "href": "sas.html#example-data",
+    "title": "Analysis of Variance in SAS",
+    "section": "Example Data",
+    "text": "Example Data\nSay we have the following sample data.\n\n/* read in data */\ndata growth;\n    input plant $ low med high;\n    datalines;\nplant1 18.51 19.19 19.23\nplant2 5.99  19.09 24.27    \nplant3 12.02 17.90 27.34\nplant4 7.06  21.47 22.23\nplant5 14.96 20.38 22.92\nplant6 13.56 14.58 28.77    \n;\nrun;"
+  },
+  {
+    "objectID": "sas.html#quick-tip-reformatting-data",
+    "href": "sas.html#quick-tip-reformatting-data",
+    "title": "Analysis of Variance in SAS",
+    "section": "Quick Tip! Reformatting Data",
+    "text": "Quick Tip! Reformatting Data\nThe Transpose procedure can easily transform our data from wide to long format.\n\n/* Putting data in long format */\nproc transpose data=growth out=growth_long (rename=(col1=growth _name_=light_level));\n   by plant;\n   var low med high;\nrun;"
+  },
+  {
+    "objectID": "sas.html#quick-tip-reformatting-data-1",
+    "href": "sas.html#quick-tip-reformatting-data-1",
+    "title": "Analysis of Variance in SAS",
+    "section": "Quick Tip! Reformatting Data",
+    "text": "Quick Tip! Reformatting Data\nNext, use pivot_longer() to restructure the data.\n\n# Putting data in long format\ngrowth &lt;- data.frame(plant = c(\"plant 1\",\"plant 2\",\"plant 3\",\"plant 4\",\"plant 5\",\"plant 6\"),\n                     low = c(18.51,5.99,11.02,7.06,14.96,13.56),\n                     med = c(19.19,19.09,17.90,21.47,20.38,14.58),\n                     high = c(19.23,24.27,27.34,22.23,22.92,28.77))\ngrowth\n\n    plant   low   med  high\n1 plant 1 18.51 19.19 19.23\n2 plant 2  5.99 19.09 24.27\n3 plant 3 11.02 17.90 27.34\n4 plant 4  7.06 21.47 22.23\n5 plant 5 14.96 20.38 22.92\n6 plant 6 13.56 14.58 28.77\n\nlibrary(tidyr)\ngrowth_long &lt;- pivot_longer(data = growth,\n                            cols = \"low\":\"high\",\n                            names_to = \"light_level\",\n                            values_to = \"growth\")\nhead(growth_long)\n\n# A tibble: 6 × 3\n  plant   light_level growth\n  &lt;chr&gt;   &lt;chr&gt;        &lt;dbl&gt;\n1 plant 1 low          18.5 \n2 plant 1 med          19.2 \n3 plant 1 high         19.2 \n4 plant 2 low           5.99\n5 plant 2 med          19.1 \n6 plant 2 high         24.3"
+  },
+  {
+    "objectID": "sas.html#anova-assumptions",
+    "href": "sas.html#anova-assumptions",
+    "title": "Analysis of Variance in SAS",
+    "section": "ANOVA Assumptions",
+    "text": "ANOVA Assumptions\nTo use ANOVA, certain assumptions must be met, or results will not be reliable.\n\n\nData is normally distributed\nObservations are independent of each other\nVariances for each group are approximately equal"
+  },
+  {
+    "objectID": "sas.html#anova-assumptions-1",
+    "href": "sas.html#anova-assumptions-1",
+    "title": "Analysis of Variance in SAS",
+    "section": "ANOVA Assumptions",
+    "text": "ANOVA Assumptions\n\nHere, each group is normally distributed with different means and equal variance."
+  },
+  {
+    "objectID": "sas.html#anova-assumptions-2",
+    "href": "sas.html#anova-assumptions-2",
+    "title": "Analysis of Variance in SAS",
+    "section": "ANOVA Assumptions",
+    "text": "ANOVA Assumptions\n\nHere, groups are normally distributed with different means, but variances are unequal."
+  },
+  {
+    "objectID": "sas.html#checking-for-normality",
+    "href": "sas.html#checking-for-normality",
+    "title": "Analysis of Variance in SAS",
+    "section": "Checking for Normality",
+    "text": "Checking for Normality\nIn a general sense, we want to check that our data approximately follows the normal distribution."
+  },
+  {
+    "objectID": "sas.html#checking-for-normality-1",
+    "href": "sas.html#checking-for-normality-1",
+    "title": "Analysis of Variance in SAS",
+    "section": "Checking for Normality",
+    "text": "Checking for Normality\nLet’s see if our data looks normal by making a histogram.\n\n/* Histogram of growth variable */\nproc sgplot data=growth_long;\n    histogram growth;\nrun;"
+  },
+  {
+    "objectID": "sas.html#how-does-anova-work",
+    "href": "sas.html#how-does-anova-work",
+    "title": "Analysis of Variance in SAS",
+    "section": "How does ANOVA work?",
+    "text": "How does ANOVA work?\nANOVA breaks down total variance of the response variable into two components:\n\n\nWithin-group variance: How much do individual units within a group vary from each other?\nBetween-group variance: How much do the different groups vary from each other?\n\n\n\nIf between-group variance is larger, this often suggests that the group means are different."
+  },
+  {
+    "objectID": "sas.html#anova-hypotheses",
+    "href": "sas.html#anova-hypotheses",
+    "title": "Analysis of Variance in SAS",
+    "section": "ANOVA Hypotheses",
+    "text": "ANOVA Hypotheses\nAn ANOVA tests the following hypotheses:\n\n\n\\(H_0:\\) All group means are equal.\n\\(H_A:\\) At least one group mean is different.\n\n\n\nWe test these hypotheses with an F-test.\n\nIf we get a p-value &lt; 0.05, then we have evidence in favor of \\(H_A\\)"
+  },
+  {
+    "objectID": "sas.html#anova-in-r",
+    "href": "sas.html#anova-in-r",
+    "title": "Analysis of Variance in SAS",
+    "section": "ANOVA In R",
+    "text": "ANOVA In R\n\n# Run an ANOVA\nmodel &lt;- aov(growth ~ light_level, data = growth_long)\nsummary(model)\n\n            Df Sum Sq Mean Sq F value   Pr(&gt;F)    \nlight_level  2  454.6  227.29   16.68 0.000154 ***\nResiduals   15  204.3   13.62                     \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1"
+  },
+  {
+    "objectID": "sas.html#interpreting-the-results",
+    "href": "sas.html#interpreting-the-results",
+    "title": "Analysis of Variance in SAS",
+    "section": "Interpreting the Results",
+    "text": "Interpreting the Results\n\n\nHere, our p-value is extremely small (0.0002), so we can conclude that at least one of the groups has a different mean.\nThe question remains: which groups are different?"
+  },
+  {
+    "objectID": "sas.html#tukeys-hsd-test",
+    "href": "sas.html#tukeys-hsd-test",
+    "title": "Analysis of Variance in SAS",
+    "section": "Tukey’s HSD Test",
+    "text": "Tukey’s HSD Test\nTukey’s honestly significant difference (HSD) test allows us to see which groups are significantly different from each other.\n\nTo run Tukey’s HSD test, we simply modify our previous code\n\n\n/* Tukeys HSD Test */\nproc glm data=growth_long;\n   class light_level;\n   model growth = light_level;\n   means light_level / tukey cldiff;\nrun;\n\nTukey’s HSD test will compare every combination of groups and determine which pairs are statistically different from each other."
+  },
+  {
+    "objectID": "sas.html#tukeys-hsd-test-results",
+    "href": "sas.html#tukeys-hsd-test-results",
+    "title": "Analysis of Variance in SAS",
+    "section": "Tukey’s HSD Test Results",
+    "text": "Tukey’s HSD Test Results\n\n\nThe astrisks in the last column indicate a difference is statistically significant.\nHere, we see that the low & high and low & medium groups are statiscially different, but not medium & high"
+  },
+  {
+    "objectID": "sas.html#one-way-vs.-two-way-anova",
+    "href": "sas.html#one-way-vs.-two-way-anova",
+    "title": "Analysis of Variance in SAS",
+    "section": "One-Way vs. Two-Way ANOVA",
+    "text": "One-Way vs. Two-Way ANOVA\n\nIf two independent categorical variables need to be analyzed, this is referred to as a two-way ANOVA\n\nThis can be extended to more than two variables\n\nTwo-way ANOVA analyzes:\n\nEach independent variable\nHow they interact (if applicable)"
+  },
+  {
+    "objectID": "sas.html#two-way-anova-example",
+    "href": "sas.html#two-way-anova-example",
+    "title": "Analysis of Variance in SAS",
+    "section": "Two-Way Anova Example",
+    "text": "Two-Way Anova Example\nConsider our original example.\n\nSay we have a second independent variable to analyze.\nNow we also want to see if the presence of fertilizer or not affects plant growth.\nWe also want to see if it interacts with light level."
+  },
+  {
+    "objectID": "sas.html#new-data-set",
+    "href": "sas.html#new-data-set",
+    "title": "Analysis of Variance in SAS",
+    "section": "New Data Set",
+    "text": "New Data Set\n\n/* New data set */\ndata growth2;\n    input plant $ fertilizer $ low med high;\n    datalines;\nplant1 Y 18.51 19.19 19.23\nplant2 N 5.99  19.09 24.27  \nplant3 Y 12.02 17.90 27.34\nplant4 N 7.06  21.47 22.23\nplant5 Y 14.96 20.38 22.92\nplant6 N 13.56 14.58 28.77  \n;\nrun;\n\nproc transpose data=growth2 out=growth_long2 (rename=(col1=growth _name_=light_level));\n   by plant fertilizer;\n   var low med high;\nrun;"
+  },
+  {
+    "objectID": "sas.html#two-way-anova-in-r",
+    "href": "sas.html#two-way-anova-in-r",
+    "title": "Analysis of Variance in SAS",
+    "section": "Two-Way ANOVA in R",
+    "text": "Two-Way ANOVA in R\n\n# Run a two-way ANOVA\nmodel2 &lt;- aov(growth ~ light_level*fertilizer, data = growth_long2)\nsummary(model2)\n\n                       Df Sum Sq Mean Sq F value   Pr(&gt;F)    \nlight_level             2  441.9  220.95  13.141 0.000949 ***\nfertilizer              1    0.3    0.32   0.019 0.893009    \nlight_level:fertilizer  2    1.4    0.71   0.042 0.958755    \nResiduals              12  201.8   16.81                     \n---\nSignif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1\n\n\n\nlight_level:fertilizer gives the analysis for the interaction.\nThe p-value for the interaction is 0.915, indicating there is no evidence of an interaction between fertilizer and light level."
+  },
+  {
+    "objectID": "sas.html#caution-in-the-face-of-interaction",
+    "href": "sas.html#caution-in-the-face-of-interaction",
+    "title": "Analysis of Variance in SAS",
+    "section": "Caution in the face of interaction!",
+    "text": "Caution in the face of interaction!\n\nEven if interaction is not determined statistically significant via an ANOVA, results still need to be looked at with caution\n\nInteraction may still be present even if it is not statistically significant.\nIndividual effects may not have meaning, even if interaction is not significant.\n\nA useful tool is an interaction plot\nThis helps us visualize how two effects (variables) are related."
+  },
+  {
+    "objectID": "sas.html#interaction-plot-no-interaction",
+    "href": "sas.html#interaction-plot-no-interaction",
+    "title": "Analysis of Variance in SAS",
+    "section": "Interaction Plot: No Interaction",
+    "text": "Interaction Plot: No Interaction"
+  },
+  {
+    "objectID": "sas.html#interaction-plot-interaction-is-present",
+    "href": "sas.html#interaction-plot-interaction-is-present",
+    "title": "Analysis of Variance in SAS",
+    "section": "Interaction Plot: Interaction is Present",
+    "text": "Interaction Plot: Interaction is Present\n\nBoth plots indicate interaction is present."
+  },
+  {
+    "objectID": "sas.html#creating-an-interaction-plot",
+    "href": "sas.html#creating-an-interaction-plot",
+    "title": "Analysis of Variance in SAS",
+    "section": "Creating an Interaction Plot",
+    "text": "Creating an Interaction Plot\n\n# Interaction plot for light level and fertilizer\ninteraction.plot(x.factor = growth_long2$fertilizer,\n                 trace.factor = growth_long2$light_level, \n                 response = growth_long2$growth, fun = mean,\n                 xlab = \"Fertilizer\", ylab = \"Growth (cm)\", trace.label = \"Light Level\",\n                 col = c(\"#E69F00\",\"#0072B2\",\"#CC79A7\"), lty = 1)"
+  },
+  {
+    "objectID": "sas.html#creating-an-interaction-plot-1",
+    "href": "sas.html#creating-an-interaction-plot-1",
+    "title": "Analysis of Variance in SAS",
+    "section": "Creating an Interaction Plot",
+    "text": "Creating an Interaction Plot\n\nThis interaction plot shows little to no interaction between fertilizer and light level, which was confirmed by the ANOVA."
+  },
+  {
+    "objectID": "sas.html#tukeys-hsd-test-for-two-way-anova",
+    "href": "sas.html#tukeys-hsd-test-for-two-way-anova",
+    "title": "Analysis of Variance in SAS",
+    "section": "Tukey’s HSD Test for Two-Way ANOVA",
+    "text": "Tukey’s HSD Test for Two-Way ANOVA\nTukey’s HSD test can also be used with a two-way ANOVA.\n\n/* Run a two-way ANOVA with proc glm */\nproc glm data=growth_long2 order=data;\n   class light_level fertilizer;\n   model growth = light_level fertilizer light_level*fertilizer;\n   means light_level fertilizer/ tukey cldiff;\nrun;\n\nI didn’t include the output here, because it is long!\n\nTukey’s HSD test can give great further insight, especially when your interaction is significant"
+  },
+  {
+    "objectID": "sas.html#other-anova-notes",
+    "href": "sas.html#other-anova-notes",
+    "title": "Analysis of Variance in SAS",
+    "section": "Other ANOVA Notes…",
+    "text": "Other ANOVA Notes…\n\n\nIf you ever encounter a scenario where error degrees of freedom are equal to or smaller than any main effect or interaction, ANOVA results won’t be reliable.\nIf you are ever worried that variances between groups aren’t equal, adding the line means group_variable / hovtest=levene(type=abs); to the GLM procedure will test for equality of variances.\n\n*Note that group_variable is arbitrary, replace with your grouping variable’s name\n\nIf you have a scenario where you have an unbalanced experiment or missing data points, you’ll want to rely on results from an ANOVA using Type III sums of squares.\n\nThe GLM procedure gives both Type I and Type III sums of squares analyses.\nIf your design is balanced, Type I and Type III outputs will be the same."
+  },
+  {
+    "objectID": "sas.html#anova-in-sas",
+    "href": "sas.html#anova-in-sas",
+    "title": "Analysis of Variance in SAS",
+    "section": "ANOVA In SAS",
+    "text": "ANOVA In SAS\n\n/* Run an ANOVA using proc glm */\nproc glm data=growth_long;\n   class light_level;\n   model growth = light_level;\nrun;\n\n\n\nThis output shows us that the model is significant, but we want to look at the individual effect."
+  },
+  {
+    "objectID": "sas.html#two-way-anova-in-sas",
+    "href": "sas.html#two-way-anova-in-sas",
+    "title": "Analysis of Variance in SAS",
+    "section": "Two-Way ANOVA in SAS",
+    "text": "Two-Way ANOVA in SAS\n\n/* Run a two-way ANOVA with proc glm */\nproc glm data=growth_long2 order=data;\n   class light_level fertilizer;\n   model growth = light_level fertilizer light_level*fertilizer;\nrun;"
+  },
+  {
+    "objectID": "sas.html#creating-an-interaction-plot-in-sas",
+    "href": "sas.html#creating-an-interaction-plot-in-sas",
+    "title": "Analysis of Variance in SAS",
+    "section": "Creating an Interaction Plot in SAS",
+    "text": "Creating an Interaction Plot in SAS\nThe GLM Procedure automatically generates an interaction plot as part of its output.\n\n\nHere, we can see there is some sort of interaction going on."
+  },
+  {
+    "objectID": "sas.html#example-data-output",
+    "href": "sas.html#example-data-output",
+    "title": "Analysis of Variance in SAS",
+    "section": "Example Data Output",
+    "text": "Example Data Output\n\n\nNote: This data is in wide format, but we’ll need it in long format in order to analyze it."
+  },
+  {
+    "objectID": "sas.html#checking-for-normality-2",
+    "href": "sas.html#checking-for-normality-2",
+    "title": "Analysis of Variance in SAS",
+    "section": "Checking for Normality",
+    "text": "Checking for Normality\n\n\nOur data looks fairly normal, so we can proceed with an ANOVA. We will assume that the variances are approximately equal."
+  },
+  {
+    "objectID": "sas.html#two-way-anova-in-sas-1",
+    "href": "sas.html#two-way-anova-in-sas-1",
+    "title": "Analysis of Variance in SAS",
+    "section": "Two-Way ANOVA in SAS",
+    "text": "Two-Way ANOVA in SAS\n\n\n“light_lev*fertilizer” gives the analysis for the interaction.\nThe p-value for the interaction is 0.143, meaning the interaction between light level and fertilizer is not statistically significant."
+  },
+  {
+    "objectID": "sas.html#creating-an-interaction-plot-in-sas-1",
+    "href": "sas.html#creating-an-interaction-plot-in-sas-1",
+    "title": "Analysis of Variance in SAS",
+    "section": "Creating an Interaction Plot in SAS",
+    "text": "Creating an Interaction Plot in SAS\nOften, it is helpful to switch the axes. We can generate a new interaction plot by modifying our existing code and using the PLM procedure.\n\n/* Generate an interaction plot with flipped axes */\nproc glm data=growth_long2 order=data;\n   class light_level fertilizer;\n   model growth = light_level fertilizer light_level*fertilizer;\n   store twoway;\nrun;\n\nproc plm restore=twoway;\n    effectplot interaction(x=fertilizer sliceby=light_level);\nrun;"
+  },
+  {
+    "objectID": "sas.html#creating-an-interaction-plot-in-sas-2",
+    "href": "sas.html#creating-an-interaction-plot-in-sas-2",
+    "title": "Analysis of Variance in SAS",
+    "section": "Creating an Interaction Plot in SAS",
+    "text": "Creating an Interaction Plot in SAS\nHere, the interaction is not as noticeable.\n\n\nMoral of the story: always look at your data in more ways than one!"
+  },
+  {
+    "objectID": "sas.html#new-data-set-1",
+    "href": "sas.html#new-data-set-1",
+    "title": "Analysis of Variance in SAS",
+    "section": "New Data Set",
+    "text": "New Data Set"
+  },
+  {
+    "objectID": "r.html#caution-when-interpreting-interaction",
+    "href": "r.html#caution-when-interpreting-interaction",
+    "title": "Analysis of Variance in R",
+    "section": "Caution when interpreting interaction!",
+    "text": "Caution when interpreting interaction!\n\nEven if interaction is not determined statistically significant via an ANOVA, results still need to be looked at with caution\n\nInteraction may still be present even if it is not statistically significant.\nIndividual effects may not have meaning, even if interaction is not significant.\n\nA useful tool is an interaction plot\nThis helps us visualize how two effects (variables) are related."
+  },
+  {
+    "objectID": "r.html#creating-an-interaction-plot-2",
+    "href": "r.html#creating-an-interaction-plot-2",
+    "title": "Analysis of Variance in R",
+    "section": "Creating an Interaction Plot",
+    "text": "Creating an Interaction Plot\nOften, it is helpful to switch the axes. Now, we clearly see some interaction between the two factors.\n\n\nMoral of the story: always look at your data in more ways than one!"
   }
 ]

@@ -443,7 +443,7 @@ Nicole Harms
 <div class="cell">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb1-1"><a></a><span class="co"># Reading in data</span></span>
 <span id="cb1-2"><a></a>growth <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">plant =</span> <span class="fu">c</span>(<span class="st">"plant 1"</span>,<span class="st">"plant 2"</span>,<span class="st">"plant 3"</span>,<span class="st">"plant 4"</span>,<span class="st">"plant 5"</span>,<span class="st">"plant 6"</span>),</span>
-<span id="cb1-3"><a></a>                     <span class="at">low =</span> <span class="fu">c</span>(<span class="fl">18.51</span>,<span class="fl">5.99</span>,<span class="fl">11.02</span>,<span class="fl">7.06</span>,<span class="fl">14.96</span>,<span class="fl">13.56</span>),</span>
+<span id="cb1-3"><a></a>                     <span class="at">low =</span> <span class="fu">c</span>(<span class="fl">18.51</span>,<span class="fl">5.99</span>,<span class="fl">12.02</span>,<span class="fl">7.06</span>,<span class="fl">14.96</span>,<span class="fl">13.56</span>),</span>
 <span id="cb1-4"><a></a>                     <span class="at">med =</span> <span class="fu">c</span>(<span class="fl">19.19</span>,<span class="fl">19.09</span>,<span class="fl">17.90</span>,<span class="fl">21.47</span>,<span class="fl">20.38</span>,<span class="fl">14.58</span>),</span>
 <span id="cb1-5"><a></a>                     <span class="at">high =</span> <span class="fu">c</span>(<span class="fl">19.23</span>,<span class="fl">24.27</span>,<span class="fl">27.34</span>,<span class="fl">22.23</span>,<span class="fl">22.92</span>,<span class="fl">28.77</span>))</span>
 <span id="cb1-6"><a></a>growth</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -451,7 +451,7 @@ Nicole Harms
 <pre><code>    plant   low   med  high
 1 plant 1 18.51 19.19 19.23
 2 plant 2  5.99 19.09 24.27
-3 plant 3 11.02 17.90 27.34
+3 plant 3 12.02 17.90 27.34
 4 plant 4  7.06 21.47 22.23
 5 plant 5 14.96 20.38 22.92
 6 plant 6 13.56 14.58 28.77</code></pre>
@@ -569,8 +569,8 @@ Nicole Harms
 <span id="cb7-3"><a></a><span class="fu">summary</span>(model)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>            Df Sum Sq Mean Sq F value   Pr(&gt;F)    
-light_level  2  454.6  227.29   16.68 0.000154 ***
-Residuals   15  204.3   13.62                     
+light_level  2  441.9  220.95   16.29 0.000174 ***
+Residuals   15  203.5   13.57                     
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
@@ -583,9 +583,9 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <pre><code>Analysis of Variance Table
 
 Response: growth
-            Df Sum Sq Mean Sq F value    Pr(&gt;F)    
-light_level  2 454.58 227.292  16.685 0.0001536 ***
-Residuals   15 204.34  13.622                      
+            Df Sum Sq Mean Sq F value   Pr(&gt;F)    
+light_level  2 441.90 220.949  16.285 0.000174 ***
+Residuals   15 203.51  13.567                     
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
@@ -615,10 +615,10 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 Fit: aov(formula = growth ~ light_level, data = growth_long)
 
 $light_level
-               diff        lwr        upr     p adj
-low-high -12.276667 -17.811651 -6.7416828 0.0001052
-med-high  -5.358333 -10.893317  0.1766505 0.0584295
-med-low    6.918333   1.383349 12.4533172 0.0141169</code></pre>
+               diff       lwr        upr     p adj
+low-high -12.110000 -17.63378 -6.5862238 0.0001189
+med-high  -5.358333 -10.88211  0.1654429 0.0578748
+med-low    6.751667   1.22789 12.2754429 0.0162799</code></pre>
 </div>
 </div>
 <ul>
@@ -662,11 +662,12 @@ med-low    6.918333   1.383349 12.4533172 0.0141169</code></pre>
 <span id="cb12-7"><a></a>                            <span class="at">cols =</span> <span class="st">"low"</span><span class="sc">:</span><span class="st">"high"</span>,</span>
 <span id="cb12-8"><a></a>                            <span class="at">names_to =</span> <span class="st">"light_level"</span>,</span>
 <span id="cb12-9"><a></a>                            <span class="at">values_to =</span> <span class="st">"growth"</span>)</span>
-<span id="cb12-10"><a></a><span class="fu">head</span>(growth_long2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<span id="cb12-10"><a></a>growth_long2<span class="sc">$</span>light_level <span class="ot">&lt;-</span> <span class="fu">factor</span>(growth_long2<span class="sc">$</span>light_level, <span class="at">levels =</span> <span class="fu">c</span>(<span class="st">"low"</span>,<span class="st">"med"</span>,<span class="st">"high"</span>))</span>
+<span id="cb12-11"><a></a><span class="fu">head</span>(growth_long2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code># A tibble: 6 × 4
   plant fertilizer light_level growth
-  &lt;int&gt; &lt;chr&gt;      &lt;chr&gt;        &lt;dbl&gt;
+  &lt;int&gt; &lt;chr&gt;      &lt;fct&gt;        &lt;dbl&gt;
 1     1 Y          low          18.5 
 2     1 Y          med          19.2 
 3     1 Y          high         19.2 
@@ -694,15 +695,16 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
 <ul>
 <li><p><code>light_level:fertilizer</code> gives the analysis for the interaction.</p></li>
-<li><p>The p-value for the interaction is 0.915, indicating there is no evidence of an interaction between fertilizer and light level.</p></li>
+<li><p>The p-value for the interaction is 0.143, meaning the interaction between light level and fertilizer is not statistically significant.</p></li>
 </ul>
 </section>
-<section id="caution-in-the-face-of-interaction" class="slide level2 center">
-<h2>Caution in the face of interaction!</h2>
+<section id="caution-when-interpreting-interaction" class="slide level2 center">
+<h2>Caution when interpreting interaction!</h2>
 <ul>
-<li><p>If interaction is determined statistically significant via an ANOVA, then generally we cannot make any assumptions about the individual effects</p>
+<li><p>Even if interaction is not determined statistically significant via an ANOVA, results still need to be looked at with caution</p>
 <ul>
-<li>Even if your individual effects show as significant, heed those results with caution if the interaction is significant</li>
+<li><p>Interaction may still be present <em>even if it is not statistically significant.</em></p></li>
+<li><p>Individual effects may not have meaning, even if interaction is not significant.</p></li>
 </ul></li>
 <li><p>A useful tool is an <strong>interaction plot</strong></p></li>
 <li><p>This helps us visualize how two effects (variables) are related.</p></li>
@@ -724,14 +726,22 @@ Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 <span id="cb16-2"><a></a><span class="fu">interaction.plot</span>(<span class="at">x.factor =</span> growth_long2<span class="sc">$</span>fertilizer,</span>
 <span id="cb16-3"><a></a>                 <span class="at">trace.factor =</span> growth_long2<span class="sc">$</span>light_level, </span>
 <span id="cb16-4"><a></a>                 <span class="at">response =</span> growth_long2<span class="sc">$</span>growth, <span class="at">fun =</span> mean,</span>
-<span id="cb16-5"><a></a>                 <span class="at">xlab =</span> <span class="st">"Fertilizer"</span>, <span class="at">ylab =</span> <span class="st">"Growth (cm)"</span>, <span class="at">trace.label =</span> <span class="st">"Light Level"</span>,</span>
+<span id="cb16-5"><a></a>                 <span class="at">xlab =</span> <span class="st">"Fertilizer"</span>, <span class="at">ylab =</span> <span class="st">"Growth (cm)"</span>, <span class="at">trace.label =</span> <span class="st">"Light level"</span>,</span>
 <span id="cb16-6"><a></a>                 <span class="at">col =</span> <span class="fu">c</span>(<span class="st">"#E69F00"</span>,<span class="st">"#0072B2"</span>,<span class="st">"#CC79A7"</span>), <span class="at">lty =</span> <span class="dv">1</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 <section id="creating-an-interaction-plot-1" class="slide level2 center">
 <h2>Creating an Interaction Plot</h2>
 
-<img data-src="r_files/figure-revealjs/unnamed-chunk-17-1.png" width="960" class="r-stretch"><p>This interaction plot shows little to no interaction between fertilizer and light level, which was confirmed by the ANOVA.</p>
+<img data-src="r_files/figure-revealjs/unnamed-chunk-17-1.png" class="quarto-figure quarto-figure-center r-stretch" width="960"><p>This interaction plot makes it hard to tell if there is interaction between fertilizer and light level.</p>
+</section>
+<section id="creating-an-interaction-plot-2" class="slide level2 center">
+<h2>Creating an Interaction Plot</h2>
+<p>Often, it is helpful to switch the axes. Now, we clearly see some interaction between the two factors.</p>
+
+<img data-src="r_files/figure-revealjs/unnamed-chunk-18-1.png" class="quarto-figure quarto-figure-center r-stretch" width="960"><div class="fragment">
+<p>Moral of the story: always look at your data in more ways than one!</p>
+</div>
 </section>
 <section id="tukeys-hsd-test-for-two-way-anova" class="slide level2 center">
 <h2>Tukey’s HSD Test for Two-Way ANOVA</h2>
