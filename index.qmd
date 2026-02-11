@@ -5,7 +5,7 @@ format:
     page-layout: full
 listing: 
   contents: 
-    - "r.qmd"
+    - "*.qmd"
   type: grid
   sort: "date"
   fields: [title, date, author, image]
