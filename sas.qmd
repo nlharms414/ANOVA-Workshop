@@ -382,7 +382,7 @@ run;
 
     -   Interaction may still be present *even if it is not statistically significant.*
 
-    -   Individual effects may not have meaning, even if interaction is not significant.
+    -   Individual effects should not be interpreted if there is any kind of interaction, significant or not.
 
 -   A useful tool is an **interaction plot**
 
@@ -484,7 +484,8 @@ run;
 
 I didn't include the output here, because it is long!
 
--   Tukey's HSD test can give great further insight, especially when your interaction is significant
+-   Tukey's HSD test can give great further insight, especially when 
+ANOVA results in a statistically insignificant interaction.
 
 ## Other ANOVA Notes... {.center style="font-size: 30px"}
 

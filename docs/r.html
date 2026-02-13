@@ -654,7 +654,7 @@ med-low    6.751667   1.22789 12.2754429 0.0162799</code></pre>
 <h2>New Data Set</h2>
 <div class="cell">
 <div class="sourceCode cell-code" id="cb12"><pre class="sourceCode numberSource r number-lines code-with-copy"><code class="sourceCode r"><span id="cb12-1"><a></a>growth2 <span class="ot">&lt;-</span> <span class="fu">data.frame</span>(<span class="at">plant =</span> <span class="fu">c</span>(<span class="dv">1</span><span class="sc">:</span><span class="dv">6</span>),</span>
-<span id="cb12-2"><a></a>                     <span class="at">fertilizer =</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"Y"</span>,<span class="st">"N"</span>),<span class="at">each=</span><span class="dv">3</span>),</span>
+<span id="cb12-2"><a></a>                     <span class="at">fertilizer =</span> <span class="fu">rep</span>(<span class="fu">c</span>(<span class="st">"Y"</span>,<span class="st">"N"</span>),<span class="dv">3</span>),</span>
 <span id="cb12-3"><a></a>                     <span class="at">low =</span> <span class="fu">c</span>(<span class="fl">18.51</span>,<span class="fl">5.99</span>,<span class="fl">12.02</span>,<span class="fl">7.06</span>,<span class="fl">14.96</span>,<span class="fl">13.56</span>),</span>
 <span id="cb12-4"><a></a>                     <span class="at">med =</span> <span class="fu">c</span>(<span class="fl">19.19</span>,<span class="fl">19.09</span>,<span class="fl">17.90</span>,<span class="fl">21.47</span>,<span class="fl">20.38</span>,<span class="fl">14.58</span>),</span>
 <span id="cb12-5"><a></a>                     <span class="at">high =</span> <span class="fu">c</span>(<span class="fl">19.23</span>,<span class="fl">24.27</span>,<span class="fl">27.34</span>,<span class="fl">22.23</span>,<span class="fl">22.92</span>,<span class="fl">28.77</span>))</span>
@@ -671,9 +671,9 @@ med-low    6.751667   1.22789 12.2754429 0.0162799</code></pre>
 1     1 Y          low          18.5 
 2     1 Y          med          19.2 
 3     1 Y          high         19.2 
-4     2 Y          low           5.99
-5     2 Y          med          19.1 
-6     2 Y          high         24.3 </code></pre>
+4     2 N          low           5.99
+5     2 N          med          19.1 
+6     2 N          high         24.3 </code></pre>
 </div>
 </div>
 </section>
@@ -685,10 +685,10 @@ med-low    6.751667   1.22789 12.2754429 0.0162799</code></pre>
 <span id="cb14-3"><a></a><span class="fu">summary</span>(model2)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-stdout">
 <pre><code>                       Df Sum Sq Mean Sq F value   Pr(&gt;F)    
-light_level             2  441.9  220.95  13.141 0.000949 ***
-fertilizer              1    0.3    0.32   0.019 0.893009    
-light_level:fertilizer  2    1.4    0.71   0.042 0.958755    
-Residuals              12  201.8   16.81                     
+light_level             2  441.9  220.95  19.265 0.000179 ***
+fertilizer              1   13.2   13.23   1.153 0.303983    
+light_level:fertilizer  2   52.7   26.33   2.296 0.143165    
+Residuals              12  137.6   11.47                     
 ---
 Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1</code></pre>
 </div>
