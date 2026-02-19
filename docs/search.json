@@ -158,7 +158,7 @@
     "href": "r.html#caution-when-interpreting-interaction",
     "title": "Analysis of Variance in R",
     "section": "Caution when interpreting interaction!",
-    "text": "Caution when interpreting interaction!\n\nEven if interaction is not determined statistically significant via an ANOVA, results still need to be looked at with caution\n\nInteraction may still be present even if it is not statistically significant.\nIndividual effects may not have meaning, even if interaction is not significant.\n\nA useful tool is an interaction plot\nThis helps us visualize how two effects (variables) are related."
+    "text": "Caution when interpreting interaction!\n\nEven if interaction is not determined statistically significant via an ANOVA, results still need to be looked at with caution\n\nInteraction may still be present even if it is not statistically significant.\nIndividual effects should not be interpreted if there is any kind of interaction, significant or not.\n\nA useful tool is an interaction plot\nThis helps us visualize how two effects (variables) are related."
   },
   {
     "objectID": "r.html#interaction-plot-no-interaction",
@@ -200,7 +200,7 @@
     "href": "r.html#tukeys-hsd-test-for-two-way-anova",
     "title": "Analysis of Variance in R",
     "section": "Tukey’s HSD Test for Two-Way ANOVA",
-    "text": "Tukey’s HSD Test for Two-Way ANOVA\nTukey’s HSD test can also be used with a two-way ANOVA.\n\n# Tukey's HSD test for a two-way ANOVA\nTukeyHSD(model2, conf.level = 0.95)\n\nI didn’t include the output here, because it is long!\n\nTukey’s HSD test can give great further insight, especially when your interaction is significant"
+    "text": "Tukey’s HSD Test for Two-Way ANOVA\nTukey’s HSD test can also be used with a two-way ANOVA.\n\n# Tukey's HSD test for a two-way ANOVA\nTukeyHSD(model2, conf.level = 0.95)\n\nI didn’t include the output here, because it is long!\n\nTukey’s HSD test can give great further insight, especially when ANOVA results in a statistically insignificant interaction."
   },
   {
     "objectID": "r.html#other-anova-notes",
